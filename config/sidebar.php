@@ -1,0 +1,177 @@
+<?php
+
+return [
+    [
+        'title' => 'Dashboard',
+        'icon' => 'bx bx-home-circle',
+        'route' => 'dashboard',
+        'active' => 'dashboard',
+        'role' => 'admin',
+    ],
+    // [
+    //     'title-menu' => 'Data',
+    //     'role' => 'admin',
+    // ],
+    // [
+    //     'title' => 'Masyarakat',
+    //     'icon' => 'bx bx-user',
+    //     'route' => 'masyarakat.index',
+    //     'active' => 'masyarakat.*',
+    //     'role' => 'admin',
+    // ],
+    // [
+    //     'title' => 'Anggaran',
+    //     'icon' => 'bx bx-wallet',
+    //     'route' => 'anggaran.index',
+    //     'active' => 'anggaran.*',
+    //     'role' => 'admin',
+    // ],
+    // [
+    //     'title' => 'SDGs Desa',
+    //     'icon' => 'bx bx-news',
+    //     'route' => 'sdgs.index',
+    //     'active' => 'sdgs.*',
+    //     'role' => 'admin',
+    // ],
+    // [
+    //     'title' => 'Berita',
+    //     'icon' => 'bx bx-news',
+    //     'route' => 'berita.index',
+    //     'active' => 'berita.*',
+    //     'role' => 'admin',
+    // ],
+    // [
+    //     'title' => 'Bansos',
+    //     'icon' => 'bx bx-box',
+    //     'route' => 'bansos.index',
+    //     'active' => 'bansos.*',
+    //     'role' => 'admin',
+    // ],
+    // [
+    //     'title' => 'Galeri',
+    //     'icon' => 'bx bx-photo-album',
+    //     'route' => 'galeri.index',
+    //     'active' => 'galeri.*',
+    //     'role' => 'admin',
+    // ],
+    // [
+    //     'title' => 'Tempat Wisata',
+    //     'icon' => 'bx bx-map-pin',
+    //     'route' => 'wisata.index',
+    //     'active' => 'wisata.*',
+    //     'role' => 'admin',
+    // ],
+    // [
+    //     'title' => 'Informasi',
+    //     'icon' => 'bx bx-info-square',
+    //     'route' => 'informasi.index',
+    //     'active' => 'informasi.*',
+    //     'role' => 'admin',
+    // ],
+    // [
+    //     'title-menu' => 'Pengaturan',
+    //     'role' => 'admin',
+    // ],
+    // [
+    //     'title' => 'Halaman Depan',
+    //     'icon' => 'bx bx-info-square',
+    //     'route' => 'pengaturan.halaman-depan.index',
+    //     'active' => 'pengaturan.halaman-depan.*',
+    //     'role' => 'admin',
+    // ],
+    // [
+    //     'title' => 'Profil Desa',
+    //     'icon' => 'bx bx-info-square',
+    //     'route' => 'pengaturan.profil-desa.index',
+    //     'active' => 'pengaturan.profil-desa.*',
+    //     'role' => 'admin',
+    // ],
+    // [
+    //     'title-menu' => 'Master Data',
+    //     'role' => 'admin',
+    // ],
+    // [
+    //     'title' => 'Berkas Gambar',
+    //     'icon' => 'bx bx-folder',
+    //     'route' => 'master.berkas.index',
+    //     'active' => 'master.berkas.*',
+    //     'role' => 'admin',
+    // ],
+    // [
+    //     'title' => 'Jenis Anggaran',
+    //     'icon' => 'bx bx-clipboard',
+    //     'route' => 'master.jenis-anggaran.index',
+    //     'active' => 'master.jenis-anggaran.*',
+    //     'role' => 'admin',
+    // ],
+    // [
+    //     'title' => 'Jenis Bansos',
+    //     'icon' => 'bx bx-notepad',
+    //     'route' => 'master.jenis-bansos.index',
+    //     'active' => 'master.jenis-bansos.*',
+    //     'role' => 'admin',
+    // ],
+    // [
+    //     'title' => 'Jenis Informasi',
+    //     'icon' => 'bx bx-copy',
+    //     'route' => 'master.jenis-informasi.index',
+    //     'active' => 'master.jenis-informasi.*',
+    //     'role' => 'admin',
+    // ],
+    // [
+    //     'title' => 'Status',
+    //     'icon' => 'bx bx-customize',
+    //     'route' => null,
+    //     'active' => 'master.status.*',
+    //     'role' => 'admin',
+    //     'child' => [
+    //         [
+    //             'active' => 'master.status.pekerjaan.*',
+    //             'route' => 'master.status.pekerjaan.index',
+    //             'title' => 'Pekerjaan',
+    //         ],
+    //         [
+    //             'active' => 'master.status.hubungan-keluarga.*',
+    //             'route' => 'master.status.hubungan-keluarga.index',
+    //             'title' => 'Hubungan Keluarga',
+    //         ],
+    //         [
+    //             'active' => 'master.status.perkawinan.*',
+    //             'route' => 'master.status.perkawinan.index',
+    //             'title' => 'Perkawinan',
+    //         ],
+    //         [
+    //             'active' => 'master.status.pendidikan-terakhir.*',
+    //             'route' => 'master.status.pendidikan-terakhir.index',
+    //             'title' => 'Pendidikan Terakhir',
+    //         ],
+    //         [
+    //             'active' => 'master.status.keluarga-berencana.*',
+    //             'route' => 'master.status.keluarga-berencana.index',
+    //             'title' => 'Keluarga Berencana',
+    //         ],
+    //         [
+    //             'active' => 'master.status.persalinan-yankes.*',
+    //             'route' => 'master.status.persalinan-yankes.index',
+    //             'title' => 'Persalinan Yankes',
+    //         ],
+    //         [
+    //             'active' => 'master.status.imunisasi-lengkap.*',
+    //             'route' => 'master.status.imunisasi-lengkap.index',
+    //             'title' => 'Imunisasi Lengkap',
+    //         ],
+    //         [
+    //             'active' => 'master.status.kepesertaan-jkn.*',
+    //             'route' => 'master.status.kepesertaan-jkn.index',
+    //             'title' => 'Kepesertaan JKN',
+    //         ]
+    //     ],
+    // ],
+    // [
+    //     'title' => 'Pengguna',
+    //     'icon' => 'bx bx-key',
+    //     'route' => 'user.index',
+    //     'active' => 'user.*',
+    //     'role' => 'admin',
+    // ],
+];
