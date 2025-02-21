@@ -19,6 +19,7 @@
 
 <link rel="stylesheet" href="{{ asset('vendor/libs/perfect-scrollbar/perfect-scrollbar.css') }}" />
 <link rel="stylesheet" href="{{ asset('vendor/libs/apex-charts/apex-charts.css') }}" />
+<link rel="stylesheet" href="{{ asset('vendor/libs/toastr/toastr.min.css') }}">
 
 <script src="{{ asset('vendor/js/helpers.js') }}"></script>
 <script src="{{ asset('js/config.js') }}"></script>
@@ -28,5 +29,9 @@
     .card-loading {
         opacity: 0.5;
         pointer-events: none;
+    }
+    .card-table {
+        border-radius: 1rem;
+        overflow: hidden;
     }
 </style>

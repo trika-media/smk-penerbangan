@@ -8,6 +8,27 @@
 <script src="{{ asset('js/main.js') }}"></script>
 <script src="{{ asset('js/dashboards-analytics.js') }}"></script>
 
+<script src="{{ asset('vendor/libs/toastr/toastr.min.js') }}"></script>
+<script>
+    toastr.options = {
+        "closeButton": true,
+        "debug": false,
+        "newestOnTop": true,
+        "progressBar": true,
+        "positionClass": "toast-top-right",
+        "preventDuplicates": false,
+        "onclick": null,
+        "showDuration": "300",
+        "hideDuration": "1000",
+        "timeOut": "5000",
+        "extendedTimeOut": "1000",
+        "showEasing": "swing",
+        "hideEasing": "linear",
+        "showMethod": "fadeIn",
+        "hideMethod": "fadeOut"
+    }
+</script>
+
 <script async defer src="https://buttons.github.io/buttons.js"></script>
 <!-- SELECT 2 -->
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
@@ -15,24 +36,24 @@
 @livewireScripts
 
 <style>
-    .select2-selection--single{
+    .select2-selection--single {
         height: 39px !important;
     }
 
-    .select2-container--default .select2-selection--single .select2-selection__rendered{
+    .select2-container--default .select2-selection--single .select2-selection__rendered {
         line-height: 38px;
     }
 
-    .select2-container .select2-selection--single .select2-selection__rendered{
+    .select2-container .select2-selection--single .select2-selection__rendered {
         padding-left: 13px;
         color: #697a8d;
     }
 
-    .select2-container--default .select2-selection--single{
+    .select2-container--default .select2-selection--single {
         border: 1px solid #d9dee3;
     }
 
-    .select2-container--default .select2-selection--single .select2-selection__arrow{
+    .select2-container--default .select2-selection--single .select2-selection__arrow {
         top: 6px;
         right: 11px;
     }

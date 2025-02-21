@@ -2,8 +2,8 @@
     <div class="mx-auto my-0 d-flex justify-content-between flex-wrap" style="max-width: 1200px;">
         <!-- Left Section -->
         <div style="flex: 1; min-width: 250px;">
-            <h4 style="margin-bottom: 10px;">Smk Penerbangan Ea</h4>
-            <p style="font-size: 14px;">Mottonya</p>
+            <h4 style="margin-bottom: 10px;">{{ config_get('APP_NAME') }}</h4>
+            <p style="font-size: 14px;">{{ config_get('ALAMAT_SEKOLAH') }}</p>
         </div>
 
         <!-- Middle Section (Links) -->
@@ -37,6 +37,6 @@
 
     <!-- Bottom Section -->
     <div style="text-align: center; margin-top: 20px; font-size: 12px;">
-        <p>&copy; {{ now()->format("Y") }} SMK Penerbangan EA. All Rights Reserved.</p>
+        <p>&copy; {{ now()->format("Y") }} {{ config_get('APP_NAME') }}. All Rights Reserved.</p>
     </div>
 </footer>

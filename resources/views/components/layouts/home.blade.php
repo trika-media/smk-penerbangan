@@ -57,19 +57,7 @@
                     <li class="nav-item">
                         <a class="nav-link {{ Route::is('jalur-pendaftaran*') ? 'active' : '' }}" aria-current="page"
                             href="{{ route('jalur-pendaftaran.index') }}">
-                            Jalur Pendaftaran
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link {{ Route::is('pengumuman*') ? 'active' : '' }}" aria-current="page"
-                            href="{{ route('pengumuman.index') }}">
-                            Pengumuman
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link {{ Route::is('program-studi*') ? 'active' : '' }}" aria-current="page"
-                            href="{{ route('program-studi.index') }}">
-                            Program Studi
+                            Berita
                         </a>
                     </li>
                 </ul>

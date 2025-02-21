@@ -47,6 +47,42 @@ return [
             'report' => false,
         ],
 
+        'homepage' => [
+            'driver' => 'local',
+            'root' => public_path('app/homepage'),
+            'url' => env('APP_URL').'/app/homepage',
+            'visibility' => 'public',
+            'throw' => false,
+            'report' => false,
+        ],
+
+        'news' => [
+            'driver' => 'local',
+            'root' => public_path('app/news'),
+            'url' => env('APP_URL').'/app/news',
+            'visibility' => 'public',
+            'throw' => false,
+            'report' => false,
+        ],
+
+        'biodata' => [
+            'driver' => 'local',
+            'root' => public_path('app/biodata'),
+            'url' => env('APP_URL').'/app/biodata',
+            'visibility' => 'public',
+            'throw' => false,
+            'report' => false,
+        ],
+
+        'slider' => [
+            'driver' => 'local',
+            'root' => public_path('app/slider'),
+            'url' => env('APP_URL').'/app/slider',
+            'visibility' => 'public',
+            'throw' => false,
+            'report' => false,
+        ],
+
         's3' => [
             'driver' => 's3',
             'key' => env('AWS_ACCESS_KEY_ID'),

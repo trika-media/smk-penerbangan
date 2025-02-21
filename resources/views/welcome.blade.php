@@ -2,46 +2,26 @@
     {{-- Carousel --}}
     <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-indicators">
-            <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="0" class="active"></button>
-            <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="1"></button>
-            <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="2"></button>
+            @for($order = 0; $order < count($slider); $order++)
+                <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="{{ $order }}" class="{{ $order == 0 ? "active" : "" }}"></button>
+            @endfor
         </div>
         <div class="carousel-inner">
-            <div class="carousel-item active">
-                <img class="d-block w-100"
-                    src="https://www.shutterstock.com/image-photo/multiracial-students-walking-university-hall-600nw-685407808.jpg"
-                    alt="First slide" style="object-fit: cover; height: 70vh; filter:brightness(50%)" />
-                <div
-                    class="carousel-caption d-none d-md-flex flex-column align-items-center justify-content-center h-100">
-                    <h1>First slide</h1>
-                    <p style="font-size: 1.2rem; width: 50%;">Eos mutat malis maluisset et, agam ancillae quo te, in vim
-                        congue pertinacia.</p>
-                    <button class="btn btn-primary">Baca Selengkapnya</button>
+            @php($k = 0)
+            @foreach ($slider as $slide)
+                <div class="carousel-item {{ $k == 0 ? 'active' : '' }}">
+                    <img class="d-block w-100" src="{{ $slide->imageUrl() }}" alt="First slide"
+                        style="object-fit: cover; height: 70vh; filter:brightness(50%)" />
+                    <div
+                        class="carousel-caption d-none d-md-flex flex-column align-items-center justify-content-center h-100">
+                        <h1>{{ $slide->main_title }}</h1>
+                        <p style="font-size: 1.2rem; width: 50%;">
+                            {{ $slide->description }}
+                        </p>
+                    </div>
                 </div>
-            </div>
-            <div class="carousel-item">
-                <img class="d-block w-100"
-                    src="https://www.shutterstock.com/image-photo/multiracial-students-walking-university-hall-600nw-685407808.jpg"
-                    alt="Second slide" style="object-fit: cover; height: 70vh; filter:brightness(50%)" />
-                <div
-                    class="carousel-caption d-none d-md-flex flex-column align-items-center justify-content-center h-100">
-                    <h1>Second slide</h1>
-                    <p style="font-size: 1.2rem; width: 50%;">In numquam omittam sea.</p>
-                    <button class="btn btn-primary">Baca Selengkapnya</button>
-                </div>
-            </div>
-            <div class="carousel-item">
-                <img class="d-block w-100"
-                    src="https://www.shutterstock.com/image-photo/multiracial-students-walking-university-hall-600nw-685407808.jpg"
-                    alt="Third slide" style="object-fit: cover; height: 70vh; filter:brightness(50%)" />
-                <div
-                    class="carousel-caption d-none d-md-flex flex-column align-items-center justify-content-center h-100">
-                    <h1>Third slide</h1>
-                    <p style="font-size: 1.2rem; width: 50%;">Lorem ipsum dolor sit amet, virtute consequat ea qui,
-                        minim graeco mel no.</p>
-                    <button class="btn btn-primary">Baca Selengkapnya</button>
-                </div>
-            </div>
+                @php($k++)
+            @endforeach
         </div>
         <a class="carousel-control-prev" href="#carouselExample" role="button" data-bs-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -64,27 +44,29 @@
                     <div class="card shadow border-0">
                         <div class="card-body">
                             <p class="mb-0 display-4">
-                                <b>AYAM GORENG</b>
+                                <b>{{ $alasan_memilih?->title ?? 'Placeholder' }}</b>
                             </p>
                             <ul class="my-3">
-                                @for ($i = 0; $i < 10; $i++)
-                                    <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur, eligendi?
+                                @for ($i = 1; $i <= count($alasan_memilih?->lists ?? []); $i++)
+                                    <li>
+                                        {{ array_key_exists($i, $alasan_memilih?->lists) ? $alasan_memilih?->lists[$i] : '' }}
                                     </li>
                                 @endfor
                             </ul>
                             <p class="mb-2">
-                                <b>Masukkan Ringkasan Kenapa Calon siswa harus memilih smk ini!</b>
+                                <b>{{ $alasan_memilih?->ringkasan ?? 'Placeholder' }}</b>
                             </p>
-                            <button class="btn btn-primary">
+                            <a class="btn btn-primary" href="{{ $alasan_memilih?->url_pendaftaran ?? '#' }}">
                                 <i class="bx bxs-news me-3"></i> FORM PENDAFTARAN
-                            </button>
+                            </a>
                         </div>
                     </div>
                 </div>
                 <div class="col-12 col-lg">
                     <div class="card shadow border-0">
                         <div class="card-body">
-                            <img src="{{ asset('students.jpg') }}" class="img-fluid rounded" alt="image" />
+                            <img src="{{ $alasan_memilih?->image ? $alasan_memilih->imageUrl() : asset('students.jpg') }}"
+                                class="img-fluid rounded" alt="image" />
                         </div>
                     </div>
                 </div>
@@ -99,16 +81,14 @@
             </h1>
 
             <div class="row justify-content-center" style="row-gap: 1.2rem">
-                @for ($i = 0; $i < 4; $i++)
+                @foreach ($jurusan as $jur)
                     <div class="col-12 col-md-6 col-lg-3">
                         <div class="card h-100">
                             <img style="height: 10rem; object-fit: cover;" class="w-100"
-                                src="https://pilm.ac.id/wp-content/uploads/2023/03/Slider-TLI.png" />
+                                src="{{ $jur->imageUrl() }}" />
                             <div class="card-body d-flex flex-column justify-content-between">
-                                <h5 class="card-title">Teknik Listrik dan Instalasi</h5>
-                                <small>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Unde pariatur sequi
-                                    deleniti? Nesciunt blanditiis soluta voluptas inventore autem iure
-                                    harum!</small><br>
+                                <h5 class="card-title">{{ $jur->nama }}</h5>
+                                <small>{{ substr($jur->deskripsi, 0, 100) }}</small><br>
                                 <a href="https://tarramatekkeng.desa.id/statistik"
                                     class="btn btn-outline-primary mt-3 py-2">
                                     Lihat Selengkapnya
@@ -117,7 +97,7 @@
                             </div>
                         </div>
                     </div>
-                @endfor
+                @endforeach
             </div>
         </div>
     </section>
@@ -127,13 +107,15 @@
             <h1 class="mb-5 text-center">
                 <b>SISTEM PENERIMAAN MURID BARU</b>
                 <br>
-                <b>TA 2025/2026</b>
+                <b>TA {{ $info_pembayaran?->tahun_ajar }}</b>
             </h1>
 
             <div class="row align-items-baseline" style="row-gap: 1.2rem">
                 <div class="col-12 col-lg">
-                    <h3 class="text-center"> RINCIAN BIAYA PENDAFTARAN <br> SPMB 2025/2026 </h3>
-                    <p class="text-center mb-0 fs-3">GELOMBANG 3 <br> 01 JANUARI 2025 S/D 31 MARET 2025</p>
+                    <h3 class="text-center"> RINCIAN BIAYA PENDAFTARAN <br> SPMB {{ $info_pembayaran?->tahun_ajar }}
+                    </h3>
+                    <p class="text-center mb-0 fs-3 text-uppercase">GELOMBANG {{ $info_pembayaran?->gelombang }} <br>
+                        {{ $info_pembayaran?->tanggal_berlaku }}</p>
                     <table class="table table-borderless table-dark table-hover my-2">
                         <thead>
                             <tr>
@@ -143,14 +125,13 @@
                         </thead>
                         <tbody>
                             @php($tot_harga = 0)
-                            @for ($i = 0; $i < 10; $i++)
+                            @foreach ($detail_pembayaran as $pembayaran)
                                 <tr>
-                                    <td> Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolorem, id! </td>
-                                    @php($harga = ($i + rand(5, 10)) * rand(2000, 8000))
-                                    @php($tot_harga += $harga)
-                                    <td>Rp. {{ number_format($harga, 0, 2) }}</td>
+                                    <td> {{ $pembayaran?->deskripsi }} </td>
+                                    @php($tot_harga += $pembayaran?->jumlah)
+                                    <td>{{ $pembayaran?->jumlah_rupiah }}</td>
                                 </tr>
-                            @endfor
+                            @endforeach
                         </tbody>
                         <tfoot>
                             <tr>
@@ -218,46 +199,23 @@
             <div class="row align-items-center text-white" style="row-gap: 1.2rem">
                 <div class="col-12 col-lg-7">
                     <p class="mb-1 display-5">
-                        <b>SMK Penerbangan Ea</b>
+                        <b>{{ config_get('APP_NAME') }}</b>
                     </p>
                     <p>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus rerum, eligendi id omnis
-                        sit voluptatum dolor quia fugit dignissimos dicta? Distinctio aspernatur voluptate velit eos
-                        consequatur enim nisi quas aliquid perferendis repudiandae quod ipsum, incidunt hic vitae saepe
-                        porro reiciendis assumenda id ipsa quisquam? Sunt ea hic autem aspernatur, consequatur iusto
-                        veritatis molestias rerum vitae error laborum necessitatibus ex accusantium beatae amet incidunt
-                        nisi magnam illo aliquam! Natus voluptas asperiores provident repellat nostrum adipisci iure,
-                        deleniti saepe dignissimos veritatis quasi ducimus aut esse qui cupiditate nesciunt eum aperiam
-                        omnis, accusantium distinctio quaerat perspiciatis earum dolores. Porro odit amet repudiandae
-                        optio?
+                        {!! $biodata->where('type', 'biodata')->first()->value !!}
                     </p>
                 </div>
                 <div class="col-12 col-lg" data-aos="fade-right">
                     <div id="carouselId" class="carousel slide" data-bs-ride="carousel">
                         <div class="carousel-inner" role="listbox">
-                            <div class="carousel-item active">
-                                <img src="https://www.shutterstock.com/image-photo/multiracial-students-walking-university-hall-600nw-685407808.jpg"
-                                    class="w-100 d-block" alt="First slide" />
-                            </div>
-                            <div class="carousel-item">
-                                <img src="https://www.shutterstock.com/image-photo/multiracial-students-walking-university-hall-600nw-685407808.jpg"
-                                    class="w-100 d-block" alt="Second slide" />
-                            </div>
-                            <div class="carousel-item">
-                                <img src="https://www.shutterstock.com/image-photo/multiracial-students-walking-university-hall-600nw-685407808.jpg"
-                                    class="w-100 d-block" alt="Third slide" />
-                            </div>
+                            @php($i = 0)
+                            @foreach ($biodata->where('type', 'biodata_image') as $snake)
+                                <div class="carousel-item {{ $i == 0 ? 'active' : '' }}">
+                                    <img src="{{ $snake->imageUrl() }}" class="w-100 d-block" />
+                                </div>
+                                @php($i++)
+                            @endforeach
                         </div>
-                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselId"
-                            data-bs-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Previous</span>
-                        </button>
-                        <button class="carousel-control-next" type="button" data-bs-target="#carouselId"
-                            data-bs-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Next</span>
-                        </button>
                     </div>
 
                 </div>
@@ -268,19 +226,19 @@
     <section class="py-3" id="features">
         <div class="container px-5 my-5">
             <h1 class="mb-5 text-center">
-                Yang Akan Anda Dapatkan Di <b>SMK Penerbangan Ea</b>
+                Yang Akan Anda Dapatkan Di <b>{{ config_get('APP_NAME') }}</b>
             </h1>
             <div class="row" style="row-gap: 1rem">
                 <div class="col-12 col-lg-8">
                     <div class="card border-0 shadow" data-aos="fade-left">
                         <div class="card-body">
                             <p class="fs-2 mb-0">
-                                <b>Keunggulan SMK Penerbangan Ea</b>
+                                <b>{{ $benefit_memilih?->title ?? 'Keunggulan ' . config_get('APP_NAME') }}</b>
                             </p>
                             <ul class="my-3">
-                                @for ($i = 0; $i < 10; $i++)
+                                @for ($i = 1; $i <= count($benefit_memilih->lists); $i++)
                                     <li class="mb-2">
-                                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur, eligendi?
+                                        {{ array_key_exists($i, $benefit_memilih->lists) ? $benefit_memilih->lists[$i] : 'Whitespace' }}
                                     </li>
                                 @endfor
                             </ul>
@@ -290,7 +248,8 @@
                 <div class="col-12 col-lg-4">
                     <div class="card border-0 shadow" data-aos="fade-right">
                         <div class="card-body">
-                            <img src="{{ asset('students.jpg') }}" class="img-fluid rounded" alt="image" />
+                            <img src="{{ $benefit_memilih->imageUrl() ? $benefit_memilih->imageUrl() : asset('students.jpg') }}"
+                                class="img-fluid rounded" alt="image" />
                         </div>
                     </div>
                 </div>
@@ -308,13 +267,13 @@
                     <h3>SMK PENERBANGAN EA</h3>
                 </div>
                 <div class="col-12 col-lg">
-                    <button class="btn btn-outline-danger btn-lg">
+                    <a class="btn btn-outline-danger btn-lg" href="{{ config_get('LSP_LINK') }}">
                         <b>ACCEPT THE CHALLENGE</b>
-                    </button>
+                    </a>
                 </div>
             </div>
-            <small class="text-secondary m-0">BNSP LISENSI NO: </small> <br>
-            <small class="text-secondary m-0">ISO 9001:2015 CERT.NO: </small>
+            <small class="text-secondary m-0">BNSP LISENSI NO: {{ config_get('BNSP_LICENSE_NUMBER') }} </small> <br>
+            <small class="text-secondary m-0">ISO 9001:2015 CERT.NO: {{ config_get('ISO_9001:2015_CERT_NO') }}</small>
         </div>
     </section>
 
@@ -325,48 +284,47 @@
             </h1>
 
             <div class="row mb-3" style="row-gap: 1rem">
-                @for ($i = 0; $i < 3; $i++)
+                @foreach ($berita->take(3) as $beri)
                     <div class="col-12 col-md-6 col-lg-4">
                         <div class="card h-100">
                             <img style="height: 10rem; object-fit: cover;" class="w-100"
-                                src="https://pilm.ac.id/wp-content/uploads/2023/03/Slider-TLI.png" />
+                                src="{{ $beri->imageUrl() }}" />
                             <div class="card-body d-flex flex-column justify-content-between">
                                 <h5 class="card-title">
-                                    <a class="text-decoration-none text-black" href="#">
-                                        <b>Berita {{ $i }}</b>
+                                    <a class="text-decoration-none text-black"
+                                        href="{{ route('berita', $beri->slug) }}">
+                                        <b>{{ $beri->title }}</b>
                                     </a>
                                 </h5>
                                 <small>
-                                    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Explicabo deserunt id
-                                    laboriosam odit. Mollitia atque voluptas harum repellat maxime quasi...
+                                    {!! Str::words($beri->konten, 30, '...') !!}
                                 </small>
                             </div>
                         </div>
                     </div>
-                @endfor
+                @endforeach
             </div>
             <div class="card border-0 shadow">
                 <ul class="list-group list-group-flush">
-                    @for ($i = 0; $i < 10; $i++)
+                    @foreach ($berita as $beri)
                         <li class="list-group-item">
                             <div class="d-flex gap-2">
-                                <img style="height: 5rem; object-fit: cover; width: 8rem" class="rounded"
-                                    src="https://pilm.ac.id/wp-content/uploads/2023/03/Slider-TLI.png" />
+                                <img style="height: 5rem; object-fit: cover; width: 5rem" class="rounded"
+                                    src="{{ $beri->imageUrl() }}" />
                                 <div class="d-flex flex-column">
                                     <h5 class="card-title">
-                                        <a class="text-decoration-none text-black" href="#">
-                                            <b>Berita {{ $i }}</b>
+                                        <a class="text-decoration-none text-black"
+                                            href="{{ route('berita', $beri->slug) }}">
+                                            <b>{{ $beri->title }}</b>
                                         </a>
                                     </h5>
                                     <small>
-                                        Lorem ipsum dolor sit, amet consectetur adipisicing elit. In totam voluptatem
-                                        velit quia nostrum nisi explicabo laudantium voluptate, excepturi odio libero
-                                        porro non quaerat, suscipit ipsa? Dolores suscipit iusto quibusdam...
+                                        {!! Str::words($beri->konten, 50, '...') !!}
                                     </small>
                                 </div>
                             </div>
                         </li>
-                    @endfor
+                    @endforeach
                 </ul>
             </div>
         </div>
@@ -382,33 +340,27 @@
             </div>
 
             <div class="accordion" id="accordionExample" data-aos="fade-up">
-                @for ($i = 0; $i <= 5; $i++)
+                @php($i = 0)
+                @foreach ($faq as $fa)
                     <div class="accordion-item">
                         <h2 class="accordion-header">
                             <button class="accordion-button {{ $i == 0 ? '' : 'collapsed' }}" type="button"
                                 data-bs-toggle="collapse" data-bs-target="#collapse{{ $i }}"
                                 aria-expanded="{{ $i == 0 ? 'true' : 'false' }}"
                                 aria-controls="collapse{{ $i }}">
-                                Accordion Item #{{ $i }}
+                                {{ $fa->question }}
                             </button>
                         </h2>
                         <div id="collapse{{ $i }}"
                             class="accordion-collapse collapse {{ $i == 0 ? 'show' : '' }}"
                             data-bs-parent="#accordionExample">
                             <div class="accordion-body">
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic possimus atque illo officia
-                                beatae eveniet soluta corporis perferendis temporibus, eos cumque consectetur omnis
-                                earum vero in ut eius nihil harum et at accusantium maxime eum unde. Totam, accusamus
-                                minima excepturi atque corrupti sed deserunt fugit quia ullam est labore velit
-                                voluptatum, cumque quae perspiciatis! Magni aperiam quae enim saepe deserunt
-                                consequatur, debitis aliquam accusantium non amet commodi. Ipsum, nesciunt. Eaque
-                                blanditiis dolore ad voluptatum aliquid. Quas fugit eius qui vitae nostrum asperiores
-                                voluptatibus reprehenderit adipisci repellat magnam, veniam alias, nihil nemo assumenda
-                                quae? Autem aliquam eius eveniet consequatur animi tempora.
+                                {!! $fa->answer !!}
                             </div>
                         </div>
                     </div>
-                @endfor
+                    @php($i++)
+                @endforeach
             </div>
         </div>
     </section>

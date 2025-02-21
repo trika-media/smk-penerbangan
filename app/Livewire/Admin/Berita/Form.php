@@ -1,0 +1,97 @@
+<?php
+
+namespace App\Livewire\Admin\Berita;
+
+use App\Models\Berita;
+use Livewire\Component;
+use App\Traits\WithAlert;
+use Illuminate\Support\Str;
+use Spatie\LivewireFilepond\WithFilePond;
+
+class Form extends Component
+{
+    use WithFilePond, WithAlert;
+
+    public $id,$title,$slug,$image_header,$konten;
+
+    public function mount($id) {
+        $this->id = $id;
+        $data = Berita::pluck('id')->toArray();
+        if((!in_array($id, $data)) && ($id != 'tambah')) {
+            return to_route('berita.index');
+        }
+        if($id != 'tambah') {
+            $data = Berita::find($id);
+            $this->title = $data->title;
+            $this->konten = $data->konten;
+            $this->slug = $data->slug;
+        }
+    }
+
+    public function updatedTitle() {
+        $this->slug = strtolower(str_replace(' ', '-', $this->title));
+    }
+
+    public function save()
+    {
+        if (($this->id != 'tambah') && !$this->image_header) {
+            $validate = $this->validate([
+                'title' => 'required',
+                'slug' => 'required|unique:beritas,slug,' . $this->id,
+                'konten' => 'required',
+            ]);
+        } else {
+            $validate = $this->validate([
+                'title' => 'required',
+                'slug' => 'required|unique:beritas,slug',
+                'konten' => 'required',
+                'image_header' => 'required|image|file|mimes:png,jpeg,jpg',
+            ]);
+        }
+
+        try {
+            if ($this->image_header) {
+                $filename = 'NEWS_' . Str::orderedUuid() . '.' . $validate['image_header']->getClientOriginalExtension();
+            } else {
+                $filename = false;
+            }
+            
+            if ($this->id != 'tambah') {
+                $data = Berita::findOrFail($this->id);
+                $data->update([
+                    'title' => $validate['title'],
+                    'author' => auth()->user()->name,
+                    'slug' => $this->slug,
+                    'konten' => $validate['konten'],
+                ]);
+
+                if ($filename) {
+                    optimize_image($validate['image_header'], 'news', $filename);
+                    $data->update([
+                        'image_header' => $filename,
+                    ]);
+                }
+            } else {
+                optimize_image($validate['image_header'], 'news', $filename);
+                Berita::create([
+                    'title' => $validate['title'],
+                    'author' => auth()->user()->name,
+                    'slug' => $this->slug,
+                    'konten' => $validate['konten'],
+                    'image_header' => $filename,
+                ]);
+            }
+
+            $this->alert('Berhasil!', 'success', 'Data Sukses Ditambahkan');
+            return to_route('berita.index');
+        } catch (\Exception $e) {
+            dd($e);
+            $this->alertEvent('Gagal!', 'danger', 'Data Gagal Ditambahkan');
+        }
+    }
+
+    public function render()
+    {
+        return view('admin.berita.form');
+    }
+}

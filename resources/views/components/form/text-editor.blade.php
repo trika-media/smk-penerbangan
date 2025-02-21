@@ -1,64 +1,57 @@
 <div>
-    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
-    <div wire:ignore>
-        <div id="toolbar-container">
-            <span class="ql-formats">
-                <select class="ql-size"></select>
-            </span>
-            <span class="ql-formats">
-                <button class="ql-bold"></button>
-                <button class="ql-italic"></button>
-                <button class="ql-underline"></button>
-                <button class="ql-strike"></button>
-            </span>
-            <span class="ql-formats">
-                <button class="ql-script" value="sub"></button>
-                <button class="ql-script" value="super"></button>
-            </span>
-            <span class="ql-formats">
-                <button class="ql-header" value="1"></button>
-                <button class="ql-header" value="2"></button>
-                <button class="ql-blockquote"></button>
-                <button class="ql-code-block"></button>
-            </span>
-            <span class="ql-formats">
-                <button class="ql-list" value="ordered"></button>
-                <button class="ql-list" value="bullet"></button>
-                <button class="ql-indent" value="-1"></button>
-                <button class="ql-indent" value="+1"></button>
-            </span>
-            <span class="ql-formats">
-                <button class="ql-direction" value="rtl"></button>
-                <select class="ql-align"></select>
-            </span>
-            <span class="ql-formats">
-                <button class="ql-link"></button>
-                <button class="ql-image"></button>
-                <button class="ql-video"></button>
-                <button class="ql-formula"></button>
-            </span>
+    <div x-data="{ value: @entangle($attributes->wire('model')) }" x-init="tinymce.init({
+        target: $refs.tinymce,
+        themes: 'modern',
+        height: 200,
+        menubar: false,
+        plugins: [
+            'advlist autolink lists link image charmap print preview anchor',
+            'searchreplace visualblocks code fullscreen',
+            'insertdatetime media table paste code help wordcount'
+        ],
+        toolbar: 'undo redo | formatselect | ' +
+            'bold italic backcolor | alignleft aligncenter ' +
+            'alignright alignjustify | bullist numlist outdent indent | ' +
+            'removeformat | help',
+        setup: function(editor) {
+            editor.on('blur', function(e) {
+                value = editor.getContent()
+            })
+    
+            editor.on('init', function(e) {
+                if (value != null) {
+                    editor.setContent(value)
+                }
+            })
+    
+            function putCursorToEnd() {
+                editor.selection.select(editor.getBody(), true);
+                editor.selection.collapse(false);
+            }
+    
+            $watch('value', function(newValue) {
+                if (newValue !== editor.getContent()) {
+                    editor.resetContent(newValue || '');
+                    putCursorToEnd();
+                }
+            });
+        }
+    })" wire:ignore>
+        <div>
+            <input x-ref="tinymce" type="textarea" {{ $attributes->whereDoesntStartWith('wire:model') }}>
         </div>
-
-        <div id="editor" style="height: 350px;"></div>
     </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
-    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+    @error($attributes->wire('model')->value)
+        <span class="text-danger">
+            {{ $message }}
+        </span>
+    @enderror
+
+    @pushOnce('script')
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/6.8.3/tinymce.min.js"
+            integrity="sha512-VCEWnpOl7PIhbYMcb64pqGZYez41C2uws/M/mDdGPy+vtEJHd9BqbShE4/VNnnZdr7YCPOjd+CBmYca/7WWWCw=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+        <script></script>
+    @endpushOnce
 </div>
-
-@script
-<script>
-    const quill = new Quill('#editor', {
-        theme: 'snow',
-        modules: {
-            syntax: true,
-            toolbar: '#toolbar-container',
-        },
-    });
-
-    quill.root.innerHTML = $wire.$get('value');
-    quill.on('text-change', function() {
-        let value = document.getElementsByClassName('ql-editor')[0].innerHTML;
-        $wire.$set('value', value, false)
-    })
-</script>
-@endscript

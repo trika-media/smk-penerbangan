@@ -1,17 +1,10 @@
 <!DOCTYPE html>
-<html
-    lang="en"
-    class="light-style layout-menu-fixed"
-    dir="ltr"
-    data-theme="theme-default"
-    data-assets-path="/"
-    data-template="vertical-menu-template-free"
->
+<html lang="en" class="light-style layout-menu-fixed" dir="ltr" data-theme="theme-default" data-assets-path="/"
+    data-template="vertical-menu-template-free">
 
 <head>
     @include('components.partials.head')
     @stack('style')
-    @livewireStyles
 </head>
 
 <body>
@@ -23,10 +16,8 @@
             <div class="layout-page">
                 @include('components.partials.navbar')
 
-                <div
-                    class="container-xxl flex-grow-1 container-p-y"
-                    style="overflow-x: hidden"
-                >
+                <div class="container-xxl flex-grow-1 container-p-y" style="overflow-x: hidden">
+                    <x-alert />
                     {{ $slot }}
                 </div>
 
@@ -38,7 +29,7 @@
     <div class="layout-overlay layout-menu-toggle"></div>
     @include('components.partials.script')
     @stack('script')
-    @livewireScripts
+    @filepondScripts
 </body>
 
 </html>
