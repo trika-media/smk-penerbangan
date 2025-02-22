@@ -9,7 +9,7 @@
             <select
                 class="form-control w-100 select2"
                 id="input-select2-{{ $this->getId() }}"
-                wire:model="value"
+                wire:model="{{ $name }}"
                 {{ isset($multiple) ? 'multiple' : '' }}>
                 <option
                     value=""

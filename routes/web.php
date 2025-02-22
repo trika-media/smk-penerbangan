@@ -7,13 +7,7 @@ Route::namespace('\App\Livewire')->group(function() {
     //NO MIDDLEWARE
     Route::get('/', Welcome::class)->name('welcome');
     Route::get('/artikel/{slug}', Berita::class)->name('berita');
-    Route::namespace('JalurPendaftaran')->prefix('jalur-pendaftaran')->as('jalur-pendaftaran.')->group(function() {
-        Route::get('/', Index::class)->name('index');
-    });
-    Route::namespace('Pengumuman')->prefix('pengumuman')->as('pengumuman.')->group(function() {
-        Route::get('/', Index::class)->name('index');
-    });
-    Route::namespace('ProgramStudi')->prefix('program-studi')->as('program-studi.')->group(function() {
+    Route::namespace('FormPendaftaran')->prefix('form-pendaftaran')->as('form-pendaftaran.')->group(function() {
         Route::get('/', Index::class)->name('index');
     });
     //GUEST ONLY
@@ -25,6 +19,9 @@ Route::namespace('\App\Livewire')->group(function() {
     Route::middleware('auth')->group(function () {
         Route::namespace('Admin')->group(function() {
             Route::get('/admin/dashboard', Dashboard::class)->name('dashboard');
+            Route::namespace('Pendaftaran')->prefix('pendaftaran')->as('pendaftaran.')->group(function() {
+                Route::get('/', Index::class)->name('index');
+            });
             Route::namespace('KompetensiKeahlian')->prefix('kompetensi-keahlian')->as('kompetensi-keahlian.')->group(function() {
                 Route::get('/', Index::class)->name('index');
             });

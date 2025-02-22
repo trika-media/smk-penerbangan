@@ -13,6 +13,9 @@
     <link rel="stylesheet" href="{{ asset('css/home.css') }}">
 
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="{{ asset('vendor/libs/toastr/toastr.min.css') }}">
+    @filepondScripts
 </head>
 
 <style>
@@ -55,9 +58,9 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {{ Route::is('jalur-pendaftaran*') ? 'active' : '' }}" aria-current="page"
-                            href="{{ route('jalur-pendaftaran.index') }}">
-                            Berita
+                        <a class="nav-link {{ Route::is('form-pendaftaran*') ? 'active' : '' }}" aria-current="page"
+                            href="{{ route('form-pendaftaran.index') }}">
+                            Pendaftaran
                         </a>
                     </li>
                 </ul>
@@ -74,10 +77,14 @@
     </nav>
 
     <div style="background: url('{{ asset('pattern-bg.png') }}') no-repeat fixed center;">
+    <x-alert />
         {{ $slot }}
+        <x-partials.footer />
     </div>
 
     {{-- <livewire:components.footer /> --}}
+
+    <script src="{{ asset('vendor/libs/jquery/jquery.js') }}"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
@@ -115,6 +122,26 @@
     </style>
     <script>
         AOS.init();
+    </script>
+    <script src="{{ asset('vendor/libs/toastr/toastr.min.js') }}"></script>
+    <script>
+        toastr.options = {
+            "closeButton": true,
+            "debug": false,
+            "newestOnTop": true,
+            "progressBar": true,
+            "positionClass": "toast-top-right",
+            "preventDuplicates": false,
+            "onclick": null,
+            "showDuration": "300",
+            "hideDuration": "1000",
+            "timeOut": "5000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+        }
     </script>
 </body>
 

@@ -1,7 +1,7 @@
 <div class="row mb-3">
     <label class="col-sm-2 col-form-label" for="input-select-{{ $name }}">{{ $title }}</label>
     <div class="col-sm-10">
-        <select class="form-control @error($name) is-invalid @enderror" id="input-select-{{ $name }}" {{ $attributes }}>
+        <select class="form-control form-select @error($name) is-invalid @enderror" id="input-select-{{ $name }}" {{ $attributes }}>
             {{ $slot }}
         </select>
 

@@ -12,8 +12,7 @@
                 <div class="carousel-item {{ $k == 0 ? 'active' : '' }}">
                     <img class="d-block w-100" src="{{ $slide->imageUrl() }}" alt="First slide"
                         style="object-fit: cover; height: 70vh; filter:brightness(50%)" />
-                    <div
-                        class="carousel-caption d-none d-md-flex flex-column align-items-center justify-content-center h-100">
+                    <div class="carousel-caption d-none d-md-flex flex-column align-items-center justify-content-center h-100">
                         <h1>{{ $slide->main_title }}</h1>
                         <p style="font-size: 1.2rem; width: 50%;">
                             {{ $slide->description }}
@@ -89,7 +88,7 @@
                             <div class="card-body d-flex flex-column justify-content-between">
                                 <h5 class="card-title">{{ $jur->nama }}</h5>
                                 <small>{{ substr($jur->deskripsi, 0, 100) }}</small><br>
-                                <a href="https://tarramatekkeng.desa.id/statistik"
+                                <a href="#"
                                     class="btn btn-outline-primary mt-3 py-2">
                                     Lihat Selengkapnya
                                     <i class="bx bx-chevron-right"></i>
@@ -364,6 +363,4 @@
             </div>
         </div>
     </section>
-
-    <x-partials.footer />
 </div>

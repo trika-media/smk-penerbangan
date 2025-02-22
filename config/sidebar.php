@@ -13,6 +13,13 @@ return [
         'role' => 'admin',
     ],
     [
+        'title' => 'Pendaftaran',
+        'icon' => 'bx bx-list-plus',
+        'route' => 'pendaftaran.index',
+        'active' => 'pendaftaran.*',
+        'role' => 'admin',
+    ],
+    [
         'title' => 'Kompetensi',
         'icon' => 'bx bx-book-reader',
         'route' => 'kompetensi-keahlian.index',

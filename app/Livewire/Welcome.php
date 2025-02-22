@@ -17,8 +17,9 @@ class Welcome extends Component
 {
     public function render()
     {
-        $id_pembayaran = PeriodePendaftaran::where('tanggal_berlaku_awal', '>=', now()->format("Y-m-d"))
-        ->where('tanggal_berlaku_akhir', '>=', now()->format("Y-m-d"))->first();
+        $id_pembayaran = PeriodePendaftaran::where('tanggal_berlaku_awal', '<=', now()->format("Y-m-d"))
+        ->where('tanggal_berlaku_akhir', '>=', now()->format("Y-m-d"))
+        ->first();
         return view('welcome', [
             'alasan_memilih' => AlasanMemilih::first(),
             'jurusan' => KompetensiKeahlian::get(),
