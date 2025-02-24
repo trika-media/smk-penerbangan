@@ -54,6 +54,9 @@ Route::namespace('\App\Livewire')->group(function() {
                 Route::namespace('Variabel')->prefix('variabel')->as('variabel.')->group(function() {
                     Route::get('/', Index::class)->name('index');
                 });
+                Route::namespace('Akun')->prefix('akun')->as('akun.')->group(function() {
+                    Route::get('/', Index::class)->name('index');
+                });
             });
         });
         Route::get('/logout', function () {

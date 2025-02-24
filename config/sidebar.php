@@ -89,6 +89,13 @@ return [
         'active' => 'settings.variabel.*',
         'role' => 'admin',
     ],
+    [
+        'title' => 'Akun',
+        'icon' => 'bx bx-user',
+        'route' => 'settings.akun.index',
+        'active' => 'settings.akun.*',
+        'role' => 'admin',
+    ],
     // [
     //     'title' => 'Anggaran',
     //     'icon' => 'bx bx-wallet',
