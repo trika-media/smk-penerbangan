@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Traits\UUID;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 
 class PeriodePendaftaran extends Model
 {
@@ -12,6 +13,7 @@ class PeriodePendaftaran extends Model
     protected $fillable = [
         'tanggal_berlaku_awal',
         'tanggal_berlaku_akhir',
+        'tahun_ajar',
         'gelombang'
     ];
 
@@ -26,14 +28,5 @@ class PeriodePendaftaran extends Model
 
     public function getTanggalBerlakuDanGelombangAttribute() {
         return $this->tanggal_berlaku_awal->translatedFormat("l, d F Y") . ' s/d ' . $this->tanggal_berlaku_akhir->translatedFormat("l, d F Y") . ' - Gelombang ' . $this->gelombang;
-    }
-
-    public function getTahunAjarAttribute() {
-        $year_first = $this->tanggal_berlaku_awal->format("Y");
-        $year_second = $this->tanggal_berlaku_akhir->format("Y");
-        if($year_first == $year_second) {
-            $year_second = (int) $year_second + 1;
-        }
-        return $year_first . '/' . $year_second;
     }
 }

@@ -1,7 +1,7 @@
 <?php
-
 namespace App\Livewire\Admin\PeriodePendaftaran;
 
+use Carbon\Carbon;
 use Livewire\Component;
 use App\Traits\WithAlert;
 use App\Models\PeriodePendaftaran;
@@ -13,19 +13,22 @@ class Index extends Component
 
     public $tanggal_berlaku_awal, $tanggal_berlaku_akhir, $gelombang, $edit, $delete;
 
-    public function rules() {
+    public function rules()
+    {
         return [
-            'tanggal_berlaku_awal' => 'required|date',
+            'tanggal_berlaku_awal'  => 'required|date',
             'tanggal_berlaku_akhir' => 'required|date|after:tanggal_berlaku_awal',
-            'gelombang' => 'required|max:255',
+            'gelombang'             => 'required|max:255',
         ];
     }
 
-    public function mount() {
+    public function mount()
+    {
         $this->tanggal_berlaku_awal = now()->format("Y-m-d");
     }
 
-    public function resetFilters() {
+    public function resetFilters()
+    {
         $this->reset('edit', 'delete', 'tanggal_berlaku_awal', 'tanggal_berlaku_akhir', 'gelombang');
         $this->tanggal_berlaku_awal = now()->format("Y-m-d");
     }
@@ -50,7 +53,7 @@ class Index extends Component
 
     public function deleteData()
     {
-        $id = $this->delete;
+        $id   = $this->delete;
         $data = PeriodePendaftaran::findOrFail($id);
         $data->delete();
         $this->resetFilters();
@@ -60,30 +63,43 @@ class Index extends Component
 
     public function editMode($id)
     {
-        $data = PeriodePendaftaran::findOrFail($id);
-        $this->edit = $id;
-        $this->tanggal_berlaku_awal = $data->tanggal_berlaku_awal->format("Y-m-d");
+        $data                        = PeriodePendaftaran::findOrFail($id);
+        $this->edit                  = $id;
+        $this->tanggal_berlaku_awal  = $data->tanggal_berlaku_awal->format("Y-m-d");
         $this->tanggal_berlaku_akhir = $data->tanggal_berlaku_akhir->format("Y-m-d");
-        $this->gelombang = $data->gelombang;
+        $this->gelombang             = $data->gelombang;
         $this->dispatch('openmodalCreate');
     }
 
-    public function save() {
+    public function save()
+    {
         $validate = $this->validate();
 
         try {
-            if($this->edit) {
-                $data = PeriodePendaftaran::find($this->edit);
+            if ($this->edit) {
+                $data        = PeriodePendaftaran::find($this->edit);
+                $year_first  = Carbon::parse($this->tanggal_berlaku_awal)->format("Y");
+                $year_second = Carbon::parse($this->tanggal_berlaku_akhir)->format("Y");
+                if ($year_first == $year_second) {
+                    $year_second = (int) $year_second + 1;
+                }
                 $data->update([
-                    'tanggal_berlaku_awal' => $this->tanggal_berlaku_awal,
+                    'tanggal_berlaku_awal'  => $this->tanggal_berlaku_awal,
                     'tanggal_berlaku_akhir' => $this->tanggal_berlaku_akhir,
-                    'gelombang' => $this->gelombang,
+                    'gelombang'             => $this->gelombang,
+                    'tahun_ajar'            => $year_first . '/' . $year_second,
                 ]);
             } else {
+                $year_first  = Carbon::parse($this->tanggal_berlaku_awal)->format("Y");
+                $year_second = Carbon::parse($this->tanggal_berlaku_akhir)->format("Y");
+                if ($year_first == $year_second) {
+                    $year_second = (int) $year_second + 1;
+                }
                 PeriodePendaftaran::create([
-                    'tanggal_berlaku_awal' => $this->tanggal_berlaku_awal,
+                    'tanggal_berlaku_awal'  => $this->tanggal_berlaku_awal,
                     'tanggal_berlaku_akhir' => $this->tanggal_berlaku_akhir,
-                    'gelombang' => $this->gelombang,
+                    'gelombang'             => $this->gelombang,
+                    'tahun_ajar'            => $year_first . '/' . $year_second,
                 ]);
             }
             $this->resetFilters();
@@ -97,14 +113,15 @@ class Index extends Component
         }
     }
 
-    public function getRowsProperty() {
+    public function getRowsProperty()
+    {
         return $this->applyPagination(PeriodePendaftaran::orderBy('gelombang', 'desc'));
     }
 
     public function render()
     {
         return view('admin.periode-pendaftaran.index', [
-            'rows' => $this->rows
+            'rows' => $this->rows,
         ]);
     }
 }

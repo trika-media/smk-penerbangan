@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>PMB PILM</title>
+    <title>{{ config_get('APP_NAME') }}</title>
 
     <link rel="shortcut icon" href="{{ asset('logo.png') }}" type="image/x-icon">
 
@@ -44,7 +44,7 @@
         <div class="container py-2">
             <a class="navbar-brand" href="/">
                 <img src="{{ asset('pilm.png') }}" style="width: 15%; object-fit: cover">
-                PMB PILM
+                {{ config_get('APP_NAME') }}
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
