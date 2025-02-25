@@ -20,7 +20,7 @@ class Index extends Component
     public function mount() {
         $data = Biodata::get();
         if(!$data->isEmpty()) {
-            $this->biodata = $data->where('type', 'biodata')->first()->value;
+            $this->biodata = $data?->where('type', 'biodata')?->first()?->value;
             $this->data = $data;
         }
     }
@@ -99,7 +99,7 @@ class Index extends Component
     }
 
     public function getImageRowProperty() {
-        return $this->data->where('type', 'biodata_image');
+        return $this?->data?->where('type', 'biodata_image') ?? [];
     }
 
     public function render()

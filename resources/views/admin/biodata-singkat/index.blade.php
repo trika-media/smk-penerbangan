@@ -23,7 +23,7 @@
                 <h3 class="mb-0">Gambar <small>(maks. 7 gambar)</small></h3>
                 <x-form.filepond name="image" />
                 <div class="row justify-content-center" style="position: relative">
-                    @foreach ($image_row as $rows)
+                    @forelse ($image_row as $rows)
                         <div class="col-6 col-md-4 col-lg-3 p-0 text-white">
                             <div class="img-hover position-absolute bottom-0 d-flex justify-content-center align-items-center"
                                 style="width: inherit; height: 100%; ;background: rgba(0, 0, 0, 0.6)">
@@ -35,7 +35,9 @@
                             <img src="{{ $rows->imageUrl() }}" alt="img"
                                 style="width: 100%; height: 100%; object-fit: cover;" />
                         </div>
-                    @endforeach
+                        @empty
+                        <x-datatables.empty />
+                    @endforelse
                 </div>
             </div>
             <div class="d-flex justify-content-end">

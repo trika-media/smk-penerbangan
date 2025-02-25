@@ -235,9 +235,9 @@
                                 <b>{{ $benefit_memilih?->title ?? 'Keunggulan ' . config_get('APP_NAME') }}</b>
                             </p>
                             <ul class="my-3">
-                                @for ($i = 1; $i <= count($benefit_memilih->lists); $i++)
+                                @for ($i = 1; $i <= count($benefit_memilih?->lists ?? []); $i++)
                                     <li class="mb-2">
-                                        {{ array_key_exists($i, $benefit_memilih->lists) ? $benefit_memilih->lists[$i] : 'Whitespace' }}
+                                        {{ array_key_exists($i, $benefit_memilih?->lists) ? $benefit_memilih?->lists[$i] : 'Whitespace' }}
                                     </li>
                                 @endfor
                             </ul>
@@ -247,7 +247,7 @@
                 <div class="col-12 col-lg-4">
                     <div class="card border-0 shadow" data-aos="fade-right">
                         <div class="card-body">
-                            <img src="{{ $benefit_memilih->imageUrl() ? $benefit_memilih->imageUrl() : asset('students.jpg') }}"
+                            <img src="{{ $benefit_memilih?->imageUrl() ? $benefit_memilih->imageUrl() : asset('students.jpg') }}"
                                 class="img-fluid rounded" alt="image" />
                         </div>
                     </div>
