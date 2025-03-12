@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{ config_get('APP_NAME') }}</title>
 
-    <link rel="shortcut icon" href="{{ asset('logo.png') }}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ asset('smk_logo.png') }}" type="image/x-icon">
 
     <link rel="stylesheet" href="{{ asset('vendor/fonts/boxicons.css') }}" />
 
@@ -43,7 +43,7 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom sticky-top shadow bg-opacity-75" style="backdrop-filter: blur(10px)">
         <div class="container py-2">
             <a class="navbar-brand" href="/">
-                <img src="{{ asset('pilm.png') }}" style="width: 15%; object-fit: cover">
+                <img src="{{ asset('smk_logo.png') }}" style="width: 15%; object-fit: cover">
                 {{ config_get('APP_NAME') }}
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
