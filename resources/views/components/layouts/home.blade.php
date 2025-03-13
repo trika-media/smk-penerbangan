@@ -23,7 +23,8 @@
         transition: all 500ms cubic-bezier(0.165, 0.84, 0.44, 1);
     }
 
-    .nav-item .nav-link.active, .nav-item:hover .nav-link {
+    .nav-item .nav-link.active,
+    .nav-item:hover .nav-link {
         box-shadow: 0 -5px 0 -2px blue inset;
     }
 
@@ -40,7 +41,8 @@
 </style>
 
 <body class="d-flex flex-column" style="min-height: 100vh;">
-    <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom sticky-top shadow bg-opacity-75" style="backdrop-filter: blur(10px)">
+    <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom sticky-top shadow bg-opacity-75"
+        style="backdrop-filter: blur(10px)">
         <div class="container py-2">
             <a class="navbar-brand w-100" href="/">
                 <img src="{{ asset('smk_logo.png') }}" style="width: 5rem; object-fit: cover; height: 5rem;">
@@ -63,10 +65,26 @@
                             Pendaftaran
                         </a>
                     </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            Profil Sekolah
+                        </a>
+                        <ul class="dropdown-menu p-0">
+                            <li>
+                                <a class="dropdown-item py-2 {{ Route::is('profil*') ? 'active' : '' }}"
+                                    aria-current="page" href="{{ route('profil.index') }}">Profil</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item py-2 {{ Route::is('mengapa-smk*') ? 'active' : '' }}"
+                                    aria-current="page" href="{{ route('mengapa-smk.index') }}">Mengapa SMK?</a>
+                            </li>
+                        </ul>
+                    </li>
                     <li class="nav-item">
-                        <a class="nav-link {{ Route::is('profil*') ? 'active' : '' }}" aria-current="page"
-                            href="{{ route('profil.index') }}">
-                            Profil
+                        <a class="nav-link {{ Route::is('keunggulan*') ? 'active' : '' }}" aria-current="page"
+                            href="{{ route('keunggulan.index') }}">
+                            Keunggulan
                         </a>
                     </li>
                     <li class="nav-item">
@@ -89,7 +107,7 @@
     </nav>
 
     <div style="background: url('{{ asset('pattern-bg.png') }}') no-repeat fixed center;">
-    <x-alert />
+        <x-alert />
         {{ $slot }}
         <x-partials.footer />
     </div>
@@ -110,24 +128,24 @@
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
     <style>
-        .select2-selection--single{
+        .select2-selection--single {
             height: 39px !important;
         }
-    
-        .select2-container--default .select2-selection--single .select2-selection__rendered{
+
+        .select2-container--default .select2-selection--single .select2-selection__rendered {
             line-height: 38px;
         }
-    
-        .select2-container .select2-selection--single .select2-selection__rendered{
+
+        .select2-container .select2-selection--single .select2-selection__rendered {
             padding-left: 13px;
             color: #697a8d;
         }
-    
-        .select2-container--default .select2-selection--single{
+
+        .select2-container--default .select2-selection--single {
             border: 1px solid #d9dee3;
         }
-    
-        .select2-container--default .select2-selection--single .select2-selection__arrow{
+
+        .select2-container--default .select2-selection--single .select2-selection__arrow {
             top: 6px;
             right: 11px;
         }

@@ -13,6 +13,12 @@ Route::namespace('\App\Livewire')->group(function() {
     Route::namespace('Profil')->prefix('profil')->as('profil.')->group(function() {
         Route::get('/', Index::class)->name('index');
     });
+    Route::namespace('Keunggulan')->prefix('keunggulan')->as('keunggulan.')->group(function() {
+        Route::get('/', Index::class)->name('index');
+    });
+    Route::namespace('MengapaSmk')->prefix('mengapa-smk')->as('mengapa-smk.')->group(function() {
+        Route::get('/', Index::class)->name('index');
+    });
     Route::namespace('KompetensiKeahlian')->prefix('jurusan')->as('jurusan.')->group(function() {
         Route::get('/', Index::class)->name('index');
         Route::get('/profil/{id}', Profil::class)->name('profil');
@@ -48,6 +54,10 @@ Route::namespace('\App\Livewire')->group(function() {
                 Route::get('/', Index::class)->name('index');
             });
             Route::namespace('Berita')->prefix('berita')->as('berita.')->group(function() {
+                Route::get('/', Index::class)->name('index');
+                Route::get('/{id?}', Form::class)->name('form');
+            });
+            Route::namespace('BlogMengapaSmk')->prefix('blog-mengapa-smk')->as('blog-mengapa-smk.')->group(function() {
                 Route::get('/', Index::class)->name('index');
                 Route::get('/{id?}', Form::class)->name('form');
             });

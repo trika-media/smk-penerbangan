@@ -76,6 +76,13 @@ return [
         'role' => 'admin',
     ],
     [
+        'title' => 'Mengapa SMK',
+        'icon' => 'bx bx-question-mark',
+        'route' => 'blog-mengapa-smk.index',
+        'active' => 'blog-mengapa-smk.*',
+        'role' => 'admin',
+    ],
+    [
         'title' => 'Biodata',
         'icon' => 'bx bx-detail',
         'route' => 'biodata-singkat.index',
