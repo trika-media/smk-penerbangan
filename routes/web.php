@@ -10,6 +10,13 @@ Route::namespace('\App\Livewire')->group(function() {
     Route::namespace('FormPendaftaran')->prefix('form-pendaftaran')->as('form-pendaftaran.')->group(function() {
         Route::get('/', Index::class)->name('index');
     });
+    Route::namespace('Profil')->prefix('profil')->as('profil.')->group(function() {
+        Route::get('/', Index::class)->name('index');
+    });
+    Route::namespace('KompetensiKeahlian')->prefix('jurusan')->as('jurusan.')->group(function() {
+        Route::get('/', Index::class)->name('index');
+        Route::get('/profil/{id}', Profil::class)->name('profil');
+    });
     //GUEST ONLY
     Route::get('/start-your-day', Login::class)
     ->middleware('guest')

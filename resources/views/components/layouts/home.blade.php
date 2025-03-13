@@ -8,7 +8,7 @@
 
     <link rel="shortcut icon" href="{{ asset('smk_logo.png') }}" type="image/x-icon">
 
-    <link rel="stylesheet" href="{{ asset('vendor/fonts/boxicons.css') }}" />
+    <link rel="stylesheet" href="{{ asset('vendor/libs/boxicons/css/boxicons.css') }}" />
 
     <link rel="stylesheet" href="{{ asset('css/home.css') }}">
 
@@ -28,13 +28,13 @@
     }
 
     .btn-login {
-        background: #EF4B4B;
+        background: #0d6efd;
         color: #FFF;
-        transition: all 2s cubic-bezier(0.215, 0.610, 0.355, 1);
+        transition: all 1s cubic-bezier(0.215, 0.610, 0.355, 1);
     }
 
     .btn-login:hover {
-        background: #f94242;
+        background: #135dcc;
         color: #FFF;
     }
 </style>
@@ -42,15 +42,15 @@
 <body class="d-flex flex-column" style="min-height: 100vh;">
     <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom sticky-top shadow bg-opacity-75" style="backdrop-filter: blur(10px)">
         <div class="container py-2">
-            <a class="navbar-brand" href="/">
-                <img src="{{ asset('smk_logo.png') }}" style="width: 15%; object-fit: cover">
+            <a class="navbar-brand w-100" href="/">
+                <img src="{{ asset('smk_logo.png') }}" style="width: 5rem; object-fit: cover; height: 5rem;">
                 {{ config_get('APP_NAME') }}
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                 aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mb-2 mb-lg-0 gap-2">
+                <ul class="navbar-nav mb-2 mb-lg-0 gap-2 me-2">
                     <li class="nav-item">
                         <a class="nav-link {{ Route::is('welcome') ? 'active' : '' }}" aria-current="page"
                             href="{{ route('welcome') }}">
@@ -61,6 +61,18 @@
                         <a class="nav-link {{ Route::is('form-pendaftaran*') ? 'active' : '' }}" aria-current="page"
                             href="{{ route('form-pendaftaran.index') }}">
                             Pendaftaran
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {{ Route::is('profil*') ? 'active' : '' }}" aria-current="page"
+                            href="{{ route('profil.index') }}">
+                            Profil
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {{ Route::is('jurusan*') ? 'active' : '' }}" aria-current="page"
+                            href="{{ route('jurusan.index') }}">
+                            Jurusan
                         </a>
                     </li>
                 </ul>

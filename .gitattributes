@@ -5,6 +5,10 @@
 *.html diff=html
 *.md diff=markdown
 *.php diff=php
+*.ttf     -text diff
+*.eot     -text diff
+*.woff    -text diff
+*.woff2   -text diff
 
 /.github export-ignore
 CHANGELOG.md export-ignore

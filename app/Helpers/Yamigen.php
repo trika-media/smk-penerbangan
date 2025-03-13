@@ -32,3 +32,29 @@ if(!function_exists('config_get')) {
         return 'not found';
     }
 }
+
+if (! function_exists('inisial')) {
+    function inisial($string, $limit_char = 5)
+    {
+        $ret     = '';
+        $ret_num = '';
+        if ($string != '') {
+            foreach (explode(' ', $string) as $word) {
+                for ($i = 0; $i <= strlen($word) - 1; $i++) {
+                    if (is_numeric($word[$i])) {
+                        $ret_num .= $word[$i];
+                    }
+                }
+                if (! is_numeric(substr($word, 0, 1))) {
+                    $ret .= strtoupper(substr($word, 0, 1));
+                }
+            }
+            if (count(str_split($ret)) == 1) {
+                return strtoupper(substr($string, 0, $limit_char)) . $ret_num;
+            }
+            return substr($ret, 0, $limit_char) . $ret_num;
+        } else {
+            return '';
+        }
+    }
+}

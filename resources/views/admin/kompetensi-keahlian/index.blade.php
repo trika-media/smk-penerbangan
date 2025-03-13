@@ -8,7 +8,10 @@
 
     <x-modal key="modalCreate" title="Tambah Data" styled>
         <x-form.input title="Nama" name="nama" wire:model="nama" />
-        <x-form.text-area title="Deskripsi" name="deskripsi" wire:model="deskripsi" />
+        <div class="row mb-3">
+            <label class="col-sm-2 col-form-label" for="input-deskripsi">Deskripsi</label>
+            <x-form.text-editor wire:model="deskripsi" />
+        </div>
         <x-filepond::upload wire:model="image" />
     </x-modal>
 
@@ -32,7 +35,7 @@
                     <tr>
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $row->nama }}</td>
-                        <td>{{ $row->deskripsi ?? '-' }}</td>
+                        <td>{!! Str::words($row->deskripsi, 50, '...') !!}</td>
                         <td>
                             <img src="{{ $row->imageUrl() }}" class="img-fluid rounded" alt="imej" width="100" />
                         </td>

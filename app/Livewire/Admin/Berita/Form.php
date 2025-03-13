@@ -30,6 +30,7 @@ class Form extends Component
 
     public function updatedTitle() {
         $this->slug = strtolower(str_replace(' ', '-', $this->title));
+        $this->slug = preg_replace('/[^A-Za-z0-9\-]/', '', $this->slug);
     }
 
     public function save()

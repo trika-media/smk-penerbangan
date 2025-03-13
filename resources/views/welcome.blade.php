@@ -2,8 +2,9 @@
     {{-- Carousel --}}
     <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-indicators">
-            @for($order = 0; $order < count($slider); $order++)
-                <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="{{ $order }}" class="{{ $order == 0 ? "active" : "" }}"></button>
+            @for ($order = 0; $order < count($slider); $order++)
+                <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="{{ $order }}"
+                    class="{{ $order == 0 ? 'active' : '' }}"></button>
             @endfor
         </div>
         <div class="carousel-inner">
@@ -12,7 +13,8 @@
                 <div class="carousel-item {{ $k == 0 ? 'active' : '' }}">
                     <img class="d-block w-100" src="{{ $slide->imageUrl() }}" alt="First slide"
                         style="object-fit: cover; height: 70vh; filter:brightness(50%)" />
-                    <div class="carousel-caption d-none d-md-flex flex-column align-items-center justify-content-center h-100">
+                    <div
+                        class="carousel-caption d-none d-md-flex flex-column align-items-center justify-content-center h-100">
                         <h1>{{ $slide->main_title }}</h1>
                         <p style="font-size: 1.2rem; width: 50%;">
                             {{ $slide->description }}
@@ -73,7 +75,7 @@
         </div>
     </section>
 
-    <section class="py-3" id="features" data-aos="fade-up">
+    <section class="py-3" id="jurusan" data-aos="fade-up">
         <div class="container px-5 my-5">
             <h1 class="mb-5 text-center">
                 Jurusan
@@ -87,9 +89,10 @@
                                 src="{{ $jur->imageUrl() }}" />
                             <div class="card-body d-flex flex-column justify-content-between">
                                 <h5 class="card-title">{{ $jur->nama }}</h5>
-                                <small>{{ substr($jur->deskripsi, 0, 100) }}</small><br>
-                                <a href="#"
-                                    class="btn btn-outline-primary mt-3 py-2">
+                                {!! Str::words($jur->deskripsi, 20, '...') !!}
+                            </div>
+                            <div class="card-footer">
+                                <a href="#" class="btn btn-outline-primary mt-3 py-2 w-100">
                                     Lihat Selengkapnya
                                     <i class="bx bx-chevron-right"></i>
                                 </a>
@@ -166,7 +169,7 @@
         </div>
     </section>
 
-    <section class="py-3 bg-gradient bg-danger bg-opacity-75" id="features">
+    <section class="py-3 bg-gradient bg-danger bg-opacity-75" id="profil">
         <div class="container px-5 my-5">
             {{-- <h1 class="mb-5 text-center">
                 Pengumuman <b>PMB</b>
@@ -201,7 +204,7 @@
                         <b>{{ config_get('APP_NAME') }}</b>
                     </p>
                     <p>
-                        {!! $biodata->where('type', 'biodata')->first()->value !!}
+                        {!! Str::words($biodata->where('type', 'biodata')->first()->value, 150, '...') !!}
                     </p>
                 </div>
                 <div class="col-12 col-lg" data-aos="fade-right">
@@ -210,7 +213,7 @@
                             @php($i = 0)
                             @foreach ($biodata->where('type', 'biodata_image') as $snake)
                                 <div class="carousel-item {{ $i == 0 ? 'active' : '' }}">
-                                    <img src="{{ $snake->imageUrl() }}" class="w-100 d-block" />
+                                    <img src="{{ $snake->imageUrl() }}" class="w-100 d-block" style="height: 20rem; object-fit: cover" />
                                 </div>
                                 @php($i++)
                             @endforeach

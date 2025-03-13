@@ -19,20 +19,20 @@
     </style>
 
     <div class="d-flex justify-content-center w-100 mx-auto" style="height: 100vh">
-        <img src="{{ asset('login.jpg') }}" style="object-fit: cover; width: 65vw; filter:brightness(90%)" height="100%" class="d-none d-lg-block">
+        <img src="{{ asset('login.jpg') }}" style="object-fit: cover; width: 65vw; filter:brightness(70%)" height="100%"
+            class="d-none d-lg-block">
         <div class="d-flex align-items-center h-full bg-white p-0" style="flex: auto">
             <div class="container my-5 p-0">
                 <div class="form-container mx-auto">
                     <div class="app-brand justify-content-center mb-5">
                         <a class="app-brand-link gap-2" href="/">
-                            {{-- <img src="{{ asset('head-login.png') }}" style="object-fit: cover;width: 100%;border-radius: 1rem"> --}}
                             <span class="app-brand-logo demo me-3">
-                                <img src="{{ asset('pilm_big.svg') }}" height="100px">
+                                <img src="{{ asset('smk_logo.png') }}" height="100px">
                             </span>
-                            {{-- <span class="app-brand-text demo text-body fw-bolder text-center"
+                            <span class="app-brand-text demo text-body fw-bolder text-center"
                                 style="text-transform:initial">
-                                Profil Desa<br> <span
-                                    class="text-primary">{{ env('APP_DESA') }}</span></span> --}}
+                                {{ config_get('APP_NAME') }}
+                            </span>
                         </a>
                     </div>
 
@@ -81,7 +81,7 @@
                             </div>
                         </div>
                         <div class="mb-3">
-                            <button class="btn btn-danger d-grid w-100" type="submit">Sign in</button>
+                            <button class="btn btn-primary d-grid w-100" type="submit">Sign in</button>
                         </div>
                     </form>
                 </div>

@@ -1,12 +1,12 @@
 <?php
 namespace App\Livewire\Admin\KompetensiKeahlian;
 
-use Livewire\Component;
-use App\Traits\WithAlert;
-use Illuminate\Support\Str;
 use App\Models\KompetensiKeahlian;
+use App\Traits\WithAlert;
 use App\Traits\WithPerPagePagination;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
+use Livewire\Component;
 use Spatie\LivewireFilepond\WithFilePond;
 
 class Index extends Component
@@ -14,15 +14,6 @@ class Index extends Component
     use WithAlert, WithPerPagePagination, WithFilePond;
 
     public $nama, $deskripsi, $image, $edit, $delete;
-
-    public function rules()
-    {
-        return [
-            'nama'      => 'required',
-            'deskripsi' => 'required',
-            'image'     => 'required|file|image|mimes:png,jpg,jpeg|max:2048',
-        ];
-    }
 
     public function editMode($id)
     {
@@ -36,21 +27,40 @@ class Index extends Component
 
     public function save()
     {
-        $validate = $this->validate();
+        if($this->image && $this->edit) {
+            $validate = $this->validate([
+                'nama'      => 'required',
+                'deskripsi' => 'required',
+                'image'     => 'required|file|image|mimes:png,jpg,jpeg|max:2048'
+            ]);
+        } elseif($this->edit) {
+            $validate = $this->validate([
+                'nama'      => 'required',
+                'deskripsi' => 'required'
+            ]);
+        } else {
+            $validate = $this->validate([
+                'nama'      => 'required',
+                'deskripsi' => 'required',
+                'image'     => 'required|file|image|mimes:png,jpg,jpeg|max:2048'
+            ]);
+        }
         try {
             if ($this->image) {
                 $filename = 'HOMEPAGE_' . Str::orderedUuid() . '.' . $validate['image']->getClientOriginalExtension();
             } else {
                 $filename = false;
             }
-            if($filename) {
+            if ($filename) {
                 optimize_image($validate['image'], 'homepage', $filename);
                 $validate['image'] = $filename;
             }
             if ($this->edit) {
                 $komp = KompetensiKeahlian::findOrFail($this->edit);
-                if(Storage::disk('homepage')->exists($komp->image)) {
-                    Storage::disk('homepage')->delete($komp->image);
+                if ($filename) {
+                    if (Storage::disk('homepage')->exists($komp->image)) {
+                        Storage::disk('homepage')->delete($komp->image);
+                    }
                 }
                 $komp->update($validate);
             } else {
@@ -64,6 +74,12 @@ class Index extends Component
         } catch (\Exception $e) {
             dd($e);
         }
+    }
+
+    public function cancelEdit()
+    {
+        $this->edit = null;
+        $this->dispatch('closemodalCreate');
     }
 
     public function cancelDelete()
