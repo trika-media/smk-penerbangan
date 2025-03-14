@@ -1,5 +1,5 @@
 <div>
-    <x-heading title="Berita" pretitle="Master Data">
+    <x-heading title="Blog Mengapa SMK" pretitle="Master Data">
         <a class="btn btn-primary btn-icon btn-lg" href="{{ route('blog-mengapa-smk.form', 'tambah') }}">
             <i class="bx bx-plus-circle bx-sm"></i>
         </a>
