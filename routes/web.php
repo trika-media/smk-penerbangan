@@ -6,7 +6,10 @@ use Illuminate\Support\Facades\Route;
 Route::namespace('\App\Livewire')->group(function() {
     //NO MIDDLEWARE
     Route::get('/', Welcome::class)->name('welcome');
-    Route::get('/artikel/{slug}', Berita::class)->name('berita');
+    Route::namespace('Berita')->prefix('artikel')->as('berita.')->group(function() {
+        Route::get('/', Index::class)->name('list');
+        Route::get('/{slug}', Detail::class)->name('detail');
+    });
     Route::namespace('FormPendaftaran')->prefix('form-pendaftaran')->as('form-pendaftaran.')->group(function() {
         Route::get('/', Index::class)->name('index');
     });

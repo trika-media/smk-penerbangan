@@ -26,7 +26,7 @@
                                 <div class="d-flex flex-column">
                                     <h5 class="card-title">
                                         <a class="text-decoration-none text-black"
-                                            href="{{ route('berita', $a?->slug) }}">
+                                            href="{{ route('berita.detail', $a?->slug) }}">
                                             <b>{{ $a?->title }}</b>
                                         </a>
                                     </h5>

@@ -93,6 +93,12 @@
                             Jurusan
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link {{ Route::is('berita*') ? 'active' : '' }}" aria-current="page"
+                            href="{{ route('berita.list') }}">
+                            Berita
+                        </a>
+                    </li>
                 </ul>
             </div>
             <a class="btn btn-login" style="width: 10rem" href="{{ route('login') }}">

@@ -294,7 +294,7 @@
                             <div class="card-body d-flex flex-column justify-content-between">
                                 <h5 class="card-title">
                                     <a class="text-decoration-none text-black"
-                                        href="{{ route('berita', $beri->slug) }}">
+                                        href="{{ route('berita.detail', $beri->slug) }}">
                                         <b>{{ $beri->title }}</b>
                                     </a>
                                 </h5>
@@ -316,7 +316,7 @@
                                 <div class="d-flex flex-column">
                                     <h5 class="card-title">
                                         <a class="text-decoration-none text-black"
-                                            href="{{ route('berita', $beri->slug) }}">
+                                            href="{{ route('berita.detail', $beri->slug) }}">
                                             <b>{{ $beri->title }}</b>
                                         </a>
                                     </h5>
