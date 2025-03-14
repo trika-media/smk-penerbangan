@@ -1,5 +1,5 @@
 <div>
-    <x-heading title="Kustomisasi Page Alasan Memilih" pretitle="Alasan Memilih">
+    <x-heading title="Kustomisasi Page Keunggulan" pretitle="Keunggulan">
     </x-heading>
 
     <div class="card mb-3">

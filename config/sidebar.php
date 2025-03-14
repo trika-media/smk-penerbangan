@@ -34,7 +34,7 @@ return [
         'role' => 'admin',
     ],
     [
-        'title' => 'Benefit Memilih',
+        'title' => 'Keunggulan',
         'icon' => 'bx bx-line-chart',
         'route' => 'benefit.index',
         'active' => 'benefit.*',

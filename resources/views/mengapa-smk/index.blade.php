@@ -22,7 +22,7 @@
                             <div class="card-body d-flex flex-column justify-content-between">
                                 <h5 class="card-title">
                                     <a class="text-decoration-none text-black"
-                                        href="{{ route('berita', $row->slug) }}">
+                                        href="{{ route('mengapa-smk.detail', $row->slug) }}">
                                         <b>{{ $row->title }}</b>
                                     </a>
                                 </h5>

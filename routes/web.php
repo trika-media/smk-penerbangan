@@ -18,6 +18,7 @@ Route::namespace('\App\Livewire')->group(function() {
     });
     Route::namespace('MengapaSmk')->prefix('mengapa-smk')->as('mengapa-smk.')->group(function() {
         Route::get('/', Index::class)->name('index');
+        Route::get('/{slug}', Detail::class)->name('detail');
     });
     Route::namespace('KompetensiKeahlian')->prefix('jurusan')->as('jurusan.')->group(function() {
         Route::get('/', Index::class)->name('index');

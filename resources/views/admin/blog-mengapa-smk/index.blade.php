@@ -39,7 +39,7 @@
                         <td>{!! Str::words($row->konten, 50, '...') !!}</td>
                         <td>
                             <div class="d-flex gap-2">
-                                <a class="btn btn-warning btn-icon" href="{{ route('berita.form', $row->id) }}">
+                                <a class="btn btn-warning btn-icon" href="{{ route('blog-mengapa-smk.form', $row->id) }}">
                                     <i class='bx bxs-edit'></i>
                                 </a>
                                 <button class="btn btn-danger btn-icon"
