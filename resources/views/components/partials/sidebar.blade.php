@@ -2,7 +2,7 @@
 	<div class="app-brand demo">
 		<a href="/" class="app-brand-link">
 			<span class="app-brand-logo demo mb-2 me-2">
-				<img src="{{ asset('smk_logo.png') }}" style="width: 10%; object-fit: cover">
+				<img src="{{ asset('logo.png') }}" style="width: 45%; object-fit: cover">
 				{{-- <span style="font-size: 35px">📬</span>? --}}
 			</span>
 			{{-- <span

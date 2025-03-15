@@ -29,7 +29,7 @@ if(!function_exists('config_get')) {
         if($config) {
             return $config->value;
         }
-        return 'not found';
+        return $name . ' not found';
     }
 }
 

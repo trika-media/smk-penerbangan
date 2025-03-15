@@ -41,76 +41,86 @@
 </style>
 
 <body class="d-flex flex-column" style="min-height: 100vh;">
-    <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom sticky-top shadow bg-opacity-75"
-        style="backdrop-filter: blur(10px)">
-        <div class="container py-2">
-            <a class="navbar-brand w-100" href="/">
-                <img src="{{ asset('smk_logo.png') }}" style="width: 5rem; object-fit: cover; height: 5rem;">
-                {{ config_get('APP_NAME') }}
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mb-2 mb-lg-0 gap-2 me-2">
-                    <li class="nav-item">
-                        <a class="nav-link {{ Route::is('welcome') ? 'active' : '' }}" aria-current="page"
-                            href="{{ route('welcome') }}">
-                            Home
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link {{ Route::is('form-pendaftaran*') ? 'active' : '' }}" aria-current="page"
-                            href="{{ route('form-pendaftaran.index') }}">
-                            Pendaftaran
-                        </a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                            aria-expanded="false">
-                            Profil Sekolah
-                        </a>
-                        <ul class="dropdown-menu p-0">
-                            <li>
-                                <a class="dropdown-item py-2 {{ Route::is('profil*') ? 'active' : '' }}"
-                                    aria-current="page" href="{{ route('profil.index') }}">Profil</a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item py-2 {{ Route::is('mengapa-smk*') ? 'active' : '' }}"
-                                    aria-current="page" href="{{ route('mengapa-smk.index') }}">Mengapa SMK?</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link {{ Route::is('keunggulan*') ? 'active' : '' }}" aria-current="page"
-                            href="{{ route('keunggulan.index') }}">
-                            Keunggulan
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link {{ Route::is('jurusan*') ? 'active' : '' }}" aria-current="page"
-                            href="{{ route('jurusan.index') }}">
-                            Jurusan
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link {{ Route::is('berita*') ? 'active' : '' }}" aria-current="page"
-                            href="{{ route('berita.list') }}">
-                            Berita
-                        </a>
-                    </li>
-                </ul>
-            </div>
-            <a class="btn btn-login" style="width: 10rem" href="{{ route('login') }}">
-                @auth
-                    Dashboard
-                @endauth
-                @guest
-                    Login
-                @endguest
-            </a>
+    <section class="sticky-top">
+        <div class="d-flex w-100 bg-primary px-5 py-2 gap-4 text-white">
+            <p class="mb-0 d-flex align-items-center fw-bold" style="font-size:14px;">
+                <i class="bx bxl-whatsapp me-2" style="font-size:20px;"></i> {{ config_get('NOMOR_HANDPHONE') }}
+            </p>
+            <p class="mb-0 d-flex align-items-center fw-bold" style="font-size:14px;">
+                <i class="bx bxl-gmail me-2" style="font-size:20px;"></i> {{ config_get('GMAIL_SEKOLAH') }}
+            </p>
         </div>
-    </nav>
+        <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom shadow bg-opacity-75"
+            style="backdrop-filter: blur(10px)">
+            <div class="container py-2">
+                <a class="navbar-brand w-100" href="/">
+                    <img src="{{ asset('logo.png') }}" style="width: auto; object-fit: cover; height: 5rem;">
+                    {{-- {{ config_get('APP_NAME') }} --}}
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                    aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mb-2 mb-lg-0 gap-2 me-2">
+                        <li class="nav-item">
+                            <a class="nav-link {{ Route::is('welcome') ? 'active' : '' }}" aria-current="page"
+                                href="{{ route('welcome') }}">
+                                Home
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {{ Route::is('form-pendaftaran*') ? 'active' : '' }}" aria-current="page"
+                                href="{{ route('form-pendaftaran.index') }}">
+                                Pendaftaran
+                            </a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                                Profil Sekolah
+                            </a>
+                            <ul class="dropdown-menu p-0">
+                                <li>
+                                    <a class="dropdown-item py-2 {{ Route::is('profil*') ? 'active' : '' }}"
+                                        aria-current="page" href="{{ route('profil.index') }}">Profil</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item py-2 {{ Route::is('mengapa-smk*') ? 'active' : '' }}"
+                                        aria-current="page" href="{{ route('mengapa-smk.index') }}">Mengapa SMK?</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {{ Route::is('keunggulan*') ? 'active' : '' }}" aria-current="page"
+                                href="{{ route('keunggulan.index') }}">
+                                Keunggulan
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {{ Route::is('jurusan*') ? 'active' : '' }}" aria-current="page"
+                                href="{{ route('jurusan.index') }}">
+                                Jurusan
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {{ Route::is('berita*') ? 'active' : '' }}" aria-current="page"
+                                href="{{ route('berita.list') }}">
+                                Berita
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <a class="btn btn-login" style="width: 10rem" href="{{ route('login') }}">
+                    @auth
+                        Dashboard
+                    @endauth
+                    @guest
+                        Login
+                    @endguest
+                </a>
+            </div>
+        </nav>
+    </section>
 
     <div style="background: url('{{ asset('pattern-bg.png') }}') no-repeat fixed center;">
         <x-alert />
