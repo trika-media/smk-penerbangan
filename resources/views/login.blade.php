@@ -27,11 +27,7 @@
                     <div class="app-brand justify-content-center mb-5">
                         <a class="app-brand-link gap-2" href="/">
                             <span class="app-brand-logo demo me-3">
-                                <img src="{{ asset('smk_logo.png') }}" height="100px">
-                            </span>
-                            <span class="app-brand-text demo text-body fw-bolder text-center"
-                                style="text-transform:initial">
-                                {{ config_get('APP_NAME') }}
+                                <img src="{{ asset('logo.png') }}" height="70px">
                             </span>
                         </a>
                     </div>
