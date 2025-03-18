@@ -1,5 +1,5 @@
 <div wire:ignore>
-    <button class="btn-open visually-hidden" data-bs-toggle="modal" data-bs-target="#{{ $key }}"></button>
+    <button class="btn-open-{{ $key }} visually-hidden" data-bs-toggle="modal" data-bs-target="#{{ $key }}"></button>
     <div class="modal fade" id="{{ $key }}" tabindex="-1"
         @isset($static) data-bs-backdrop="static" @endisset data-bs-keyboard="false" role="dialog"
         aria-labelledby="modalTitleId" aria-hidden="true">
@@ -35,7 +35,7 @@
     @push('script')
         <script>
             let btnClose = document.querySelectorAll('.btn-close');
-            let btnOpen = document.querySelectorAll('.btn-open');
+            let btnOpen = document.querySelectorAll('.btn-open-{{ $key }}');
             document.addEventListener('livewire:init', () => {
                 Livewire.on('open' + '{{ $key }}', () => {
                     btnOpen.forEach(element => {

@@ -38,8 +38,8 @@ class Index extends Component
         if ($id_pembayaran) {
             $validate['periode'] = $id_pembayaran->id;
         } else {
-            $this->alert('warning', 'Pendaftaran Ditolak!', 'Pendaftaran Belum Berlaku!');
-            return to_route('welcome');
+            $this->alertEvent('warning', 'Pendaftaran Ditolak!', 'Pendaftaran Belum Berlaku!');
+            return;
         }
         try {
             Pendaftaran::create($validate);

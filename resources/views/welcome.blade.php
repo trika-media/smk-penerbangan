@@ -34,9 +34,9 @@
         </a>
     </div>
 
-    <section class="py-3" id="features">
+    <section class="py-3 bg-opacity-75" id="features" style="background: #608BC1">
         <div class="container px-5 my-5" data-aos="fade-right">
-            <h1 class="mb-5 text-center">
+            <h1 class="mb-5 text-center text-white">
                 <b>Kenapa</b> Anda Harus Memilih <b>SMK Penerbangan</b>?
             </h1>
 
@@ -169,6 +169,43 @@
         </div>
     </section>
 
+    <section class="py-3" id="jurusan" data-aos="fade-up">
+        <div class="container px-5 my-5">
+            <h1 class="mb-5 text-center">
+                Fasilitas
+            </h1>
+
+            <div class="row justify-content-center" style="row-gap: 1.2rem">
+                <div class="col-12">
+                    <div class="row p-0">
+                        @foreach ($fasilitas->where('kategori', 'image') as $fasilito)
+                            <div class="col-6 col-md-4 col-lg-2 p-0">
+                                <img style="height: 10rem; object-fit: cover;" class="w-100"
+                                    src="{{ $fasilito->imageUrl() }}" />
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="row justify-content-center p-0">
+                        @foreach ($fasilitas->where('kategori', '!=', 'image')->groupBy('kategori') as $key => $fasilito)
+                            <div class="col-6 col-md-4 p-0">
+                                <h4>{{ $key }}</h4>
+                                <ul>
+                                    @foreach ($fasilito as $fa)
+                                        <li>
+                                            {{ $fa->nama }}
+                                        </li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <section class="py-3 bg-gradient bg-danger bg-opacity-75" id="profil">
         <div class="container px-5 my-5">
             {{-- <h1 class="mb-5 text-center">
@@ -213,7 +250,8 @@
                             @php($i = 0)
                             @foreach ($biodata->where('type', 'biodata_image') as $snake)
                                 <div class="carousel-item {{ $i == 0 ? 'active' : '' }}">
-                                    <img src="{{ $snake->imageUrl() }}" class="w-100 d-block" style="height: 20rem; object-fit: cover" />
+                                    <img src="{{ $snake->imageUrl() }}" class="w-100 d-block"
+                                        style="height: 20rem; object-fit: cover" />
                                 </div>
                                 @php($i++)
                             @endforeach

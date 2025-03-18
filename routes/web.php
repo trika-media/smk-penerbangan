@@ -71,6 +71,9 @@ Route::namespace('\App\Livewire')->group(function() {
             Route::namespace('Benefit')->prefix('benefit')->as('benefit.')->group(function() {
                 Route::get('/', Index::class)->name('index');
             });
+            Route::namespace('Facility')->prefix('facility')->as('facility.')->group(function() {
+                Route::get('/', Index::class)->name('index');
+            });
             Route::namespace('Settings')->prefix('settings')->as('settings.')->group(function() {
                 Route::namespace('Variabel')->prefix('variabel')->as('variabel.')->group(function() {
                     Route::get('/', Index::class)->name('index');

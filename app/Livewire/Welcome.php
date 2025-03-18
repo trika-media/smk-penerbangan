@@ -8,6 +8,7 @@ use App\Models\Slider;
 use App\Models\Biodata;
 use App\Models\Visitor;
 use Livewire\Component;
+use App\Models\Fasilitas;
 use App\Models\Pembayaran;
 use Illuminate\Http\Request;
 use App\Models\AlasanMemilih;
@@ -28,6 +29,7 @@ class Welcome extends Component
             'user_agent' => $req->userAgent(),
             'date' => now()->format("Y-m-d")
         ]);
+        
         return view('welcome', [
             'alasan_memilih' => AlasanMemilih::first(),
             'jurusan' => KompetensiKeahlian::get(),
@@ -37,6 +39,7 @@ class Welcome extends Component
             'biodata' => Biodata::get(),
             'slider' => Slider::get(),
             'berita' => Berita::limit(10)->get(),
+            'fasilitas' => Fasilitas::get(),
             'info_pembayaran' => $id_pembayaran
         ])->layout('components.layouts.home');
     }

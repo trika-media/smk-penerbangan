@@ -69,6 +69,13 @@ return [
         'role' => 'admin',
     ],
     [
+        'title' => 'Fasilitas',
+        'icon' => 'bx bx-hard-hat',
+        'route' => 'facility.index',
+        'active' => 'facility.*',
+        'role' => 'admin',
+    ],
+    [
         'title' => 'Berita',
         'icon' => 'bx bx-news',
         'route' => 'berita.index',

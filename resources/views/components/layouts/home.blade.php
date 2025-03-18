@@ -15,6 +15,8 @@
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
     <link rel="stylesheet" href="{{ asset('vendor/libs/toastr/toastr.min.css') }}">
+    @stack('style')
+    @livewireStyles
     @filepondScripts
 </head>
 
@@ -42,7 +44,7 @@
 
 <body class="d-flex flex-column" style="min-height: 100vh;">
     <section class="sticky-top">
-        <div class="d-flex w-100 bg-primary px-5 py-2 gap-4 text-white">
+        <div class="d-flex w-100 px-5 py-2 gap-4 text-white" style="background: #578FCA">
             <p class="mb-0 d-flex align-items-center fw-bold" style="font-size:14px;">
                 <i class="bx bxl-whatsapp me-2" style="font-size:20px;"></i> {{ config_get('NOMOR_HANDPHONE') }}
             </p>
@@ -189,6 +191,8 @@
             "hideMethod": "fadeOut"
         }
     </script>
+    @stack('script')
+    @livewireScripts
 </body>
 
 </html>

@@ -30,6 +30,12 @@
                         <td>{{ $row->created_at->translatedFormat('l, d F Y') }}</td>
                         <td>
                             <div class="d-flex gap-2">
+                                @if ($row->accepted == 1)
+                                    <button class="btn btn-success btn-icon"
+                                        onclick="openWhatsApp('{{ $row->nohp }}', '')">
+                                        <i class="bx bxl-whatsapp"></i>
+                                    </button>
+                                @endif
                                 <button class="btn btn-success btn-icon" wire:click="acceptData('{{ $row->id }}')"
                                     @disabled($row->accepted == 1)>
                                     <i class="bx bx-check-circle"></i>
@@ -54,4 +60,32 @@
         </table>
         {{ $rows->links() }}
     </div>
+
+    <script>
+        var message_content = '';
+
+        function openWhatsApp(row, message) {
+            // Gunakan parameter row yang diterima oleh fungsi
+            var nomor = row;
+            var nomorBaru = "62" + nomor.slice(1);
+
+            // Buka WhatsApp di tab atau jendela baru
+            window.open('https://api.whatsapp.com/send?phone=' + nomorBaru + '&text=' + message, '_blank');
+        }
+        document.addEventListener('DOMContentLoaded', function() {
+            function openNewTab(index) {
+                let link = index;
+                window.open(link, '_blank')
+            }
+
+            function openWhatsApp(row, message) {
+                // Gunakan parameter row yang diterima oleh fungsi
+                var nomor = row;
+                var nomorBaru = "62" + nomor.slice(1);
+
+                // Buka WhatsApp di tab atau jendela baru
+                window.open('https://api.whatsapp.com/send?phone=' + nomorBaru + '&text=' + message, '_blank');
+            }
+        })
+    </script>
 </div>
