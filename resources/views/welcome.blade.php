@@ -268,8 +268,8 @@
             <h1 class="mb-5 text-center">
                 Yang Akan Anda Dapatkan Di <b>{{ config_get('APP_NAME') }}</b>
             </h1>
-            <div class="row" style="row-gap: 1rem">
-                <div class="col-12 col-lg-8">
+            <div class="row align-items-center" style="row-gap: 1rem">
+                <div class="col-12 col-lg-6">
                     <div class="card border-0 shadow" data-aos="fade-left">
                         <div class="card-body">
                             <p class="fs-2 mb-0">
@@ -285,7 +285,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-12 col-lg-4">
+                <div class="col-12 col-lg-6">
                     <div class="card border-0 shadow" data-aos="fade-right">
                         <div class="card-body">
                             <img src="{{ $benefit_memilih?->imageUrl() ? $benefit_memilih->imageUrl() : asset('students.jpg') }}"
