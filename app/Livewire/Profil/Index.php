@@ -7,10 +7,17 @@ use Livewire\Component;
 
 class Index extends Component
 {
+    public $id;
+
+    public function mount($id) {
+        $this->id = $id;
+    }
+
     public function render()
     {
         return view('profil.index', [
-            'biodata' => Biodata::get(),
+            'biodata' => Biodata::where('type', $this->id)->first(),
+            'biodata_image' => Biodata::where('type', $this->id . '_image')->get(),
         ])
         ->layout('components.layouts.home');
     }

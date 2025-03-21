@@ -60,8 +60,9 @@
                     {{-- {{ config_get('APP_NAME') }} --}}
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                    aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation"><span
+                        class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mb-2 mb-lg-0 gap-2 me-2">
                         <li class="nav-item">
@@ -71,8 +72,8 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link {{ Route::is('form-pendaftaran*') ? 'active' : '' }}" aria-current="page"
-                                href="{{ route('form-pendaftaran.index') }}">
+                            <a class="nav-link {{ Route::is('form-pendaftaran*') ? 'active' : '' }}"
+                                aria-current="page" href="{{ route('form-pendaftaran.index') }}">
                                 Pendaftaran
                             </a>
                         </li>
@@ -83,8 +84,23 @@
                             </a>
                             <ul class="dropdown-menu p-0">
                                 <li>
-                                    <a class="dropdown-item py-2 {{ Route::is('profil*') ? 'active' : '' }}"
-                                        aria-current="page" href="{{ route('profil.index') }}">Profil</a>
+                                    <a class="dropdown-item py-2 {{ Route::currentRouteName() === 'profil.index' && request('id') == 'biodata' ? 'active' : '' }}"
+                                        aria-current="page" href="{{ route('profil.index', 'biodata') }}">Profil
+                                        Sekolah</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item py-2 {{ Route::currentRouteName() === 'profil.index' && request('id') == 'yayasan' ? 'active' : '' }}"
+                                        aria-current="page" href="{{ route('profil.index', 'yayasan') }}">Profil
+                                        Yayasan</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item py-2 {{ Route::currentRouteName() === 'profil.index' && request('id') == 'guru' ? 'active' : '' }}"
+                                        aria-current="page" href="{{ route('profil.index', 'guru') }}">Profil Guru</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item py-2 {{ Route::currentRouteName() === 'profil.index' && request('id') == 'extrakurikuler' ? 'active' : '' }}"
+                                        aria-current="page" href="{{ route('profil.index', 'extrakurikuler') }}">Extra
+                                        Kurikuler</a>
                                 </li>
                                 <li>
                                     <a class="dropdown-item py-2 {{ Route::is('mengapa-smk*') ? 'active' : '' }}"

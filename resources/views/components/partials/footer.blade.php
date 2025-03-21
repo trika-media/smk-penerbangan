@@ -17,7 +17,7 @@
             <h4 style="margin-bottom: 10px;">Profile Sekolah</h4>
             <ul style="list-style-type: none; padding: 0;">
                 <li class="mb-2">
-                    <a href="{{ route('profil.index') }}" class="text-white text-decoration-none d-block">
+                    <a href="{{ route('profil.index', 'biodata') }}" class="text-white text-decoration-none d-block">
                         Profile Sekolah
                     </a>
                 </li>

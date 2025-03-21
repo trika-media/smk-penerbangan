@@ -14,7 +14,7 @@ Route::namespace('\App\Livewire')->group(function() {
         Route::get('/', Index::class)->name('index');
     });
     Route::namespace('Profil')->prefix('profil')->as('profil.')->group(function() {
-        Route::get('/', Index::class)->name('index');
+        Route::get('/{id}', Index::class)->name('index');
     });
     Route::namespace('Keunggulan')->prefix('keunggulan')->as('keunggulan.')->group(function() {
         Route::get('/', Index::class)->name('index');

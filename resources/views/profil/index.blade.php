@@ -4,11 +4,11 @@
         <div class="row">
             <div class="col-12 col-md-6 col-lg-8">
                 <p>
-                    {!! $biodata->where('type', 'biodata')->first()->value !!}
+                    {!! $biodata->value !!}
                 </p>
             </div>
             <div class="col-12 col-md-6 col-lg-4">
-                @foreach ($biodata->where('type', 'biodata_image') as $snake)
+                @foreach ($biodata_image as $snake)
                 <img src="{{ $snake->imageUrl() }}" class="w-100 d-block"
                     style="height: 20rem; object-fit: cover" />
                 @endforeach
