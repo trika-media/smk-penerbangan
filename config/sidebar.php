@@ -90,6 +90,13 @@ return [
         'role' => 'admin',
     ],
     [
+        'title' => 'Running Text',
+        'icon' => 'bx bx-question-mark',
+        'route' => 'running-text.index',
+        'active' => 'running-text.*',
+        'role' => 'admin',
+    ],
+    [
         'title' => 'Biodata',
         'icon' => 'bx bx-detail',
         'route' => 'biodata-singkat.index',

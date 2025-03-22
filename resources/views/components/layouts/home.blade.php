@@ -44,6 +44,15 @@
 
 <body class="d-flex flex-column" style="min-height: 100vh;">
     <section class="sticky-top">
+        <div class="d-flex w-100 px-5 py-2 gap-4 text-white bg-dark">
+            <marquee>
+                @foreach(App\Models\Biodata::where('type', 'running_text')->get() as $text)
+                    <span class="me-3">
+                        {{ $text->value }}
+                    </span>
+                @endforeach
+            </marquee>
+        </div>
         <div class="d-flex w-100 px-5 py-2 gap-4 text-white" style="background: #578FCA">
             <p class="mb-0 d-flex align-items-center fw-bold" style="font-size:14px;">
                 <i class="bx bxl-whatsapp me-2" style="font-size:20px;"></i> {{ config_get('NOMOR_HANDPHONE') }}

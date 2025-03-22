@@ -57,6 +57,9 @@ Route::namespace('\App\Livewire')->group(function() {
             Route::namespace('Faq')->prefix('faq')->as('faq.')->group(function() {
                 Route::get('/', Index::class)->name('index');
             });
+            Route::namespace('RunningText')->prefix('running-text')->as('running-text.')->group(function() {
+                Route::get('/', Index::class)->name('index');
+            });
             Route::namespace('Berita')->prefix('berita')->as('berita.')->group(function() {
                 Route::get('/', Index::class)->name('index');
                 Route::get('/{id?}', Form::class)->name('form');
