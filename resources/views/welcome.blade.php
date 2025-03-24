@@ -12,13 +12,13 @@
             @foreach ($slider as $slide)
                 <div class="carousel-item {{ $k == 0 ? 'active' : '' }}">
                     <img class="d-block w-100" src="{{ $slide->imageUrl() }}" alt="First slide"
-                        style="object-fit: cover; height: 70vh; filter:brightness(50%)" />
+                        style="object-fit: cover; height: 70vh;" />
                     <div
                         class="carousel-caption d-none d-md-flex flex-column align-items-center justify-content-center h-100">
-                        <h1>{{ $slide->main_title }}</h1>
-                        <p style="font-size: 1.2rem; width: 50%;">
-                            {{ $slide->description }}
-                        </p>
+                        <!--<h1>{{ $slide->main_title }}</h1>-->
+                        <!--<p style="font-size: 1.2rem; width: 50%;">-->
+                        <!--    {{ $slide->description }}-->
+                        <!--</p>-->
                     </div>
                 </div>
                 @php($k++)
