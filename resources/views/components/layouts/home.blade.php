@@ -17,7 +17,6 @@
     <link rel="stylesheet" href="{{ asset('vendor/libs/toastr/toastr.min.css') }}">
     @stack('style')
     @livewireStyles
-    @filepondScripts
 </head>
 
 <style>
@@ -149,8 +148,8 @@
         </nav>
     </section>
 
+    <x-alert />
     <div style="background: url('{{ asset('pattern-bg.png') }}') no-repeat fixed center;">
-        <x-alert />
         {{ $slot }}
         <x-partials.footer />
     </div>
@@ -216,8 +215,9 @@
             "hideMethod": "fadeOut"
         }
     </script>
-    @stack('script')
     @livewireScripts
+    @stack('script')
+    @filepondScripts
 </body>
 
 </html>

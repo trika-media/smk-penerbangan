@@ -17,6 +17,8 @@ class Pendaftaran extends Model
         'tanggal_lahir',
         'asal_sekolah',
         'jk',
+        'nama_ibu',
+        'nohp_ibu',
         'agama',
         'periode',
         'accepted',

@@ -38,21 +38,21 @@
 
     @push('script')
         <script>
-            window.addEventListener('alert', event => {
-                let type = event.detail[0].type;
+            Livewire.on('alert', event => {
+                let type = event[0].type;
                 switch (type) {
 
                     case "success":
-                        toastr.success(event.detail[0].detail, event.detail[0].message)
+                        toastr.success(event[0].detail, event[0].message)
                         break;
                     case "danger":
-                        toastr.error(event.detail[0].detail, event.detail[0].message)
+                        toastr.error(event[0].detail, event[0].message)
                         break;
                     case "info":
-                        toastr.info(event.detail[0].detail, event.detail[0].message)
+                        toastr.info(event[0].detail, event[0].message)
                         break;
                     case "warning":
-                        toastr.warning(event.detail[0].detail, event.detail[0].message)
+                        toastr.warning(event[0].detail, event[0].message)
                         break;
 
                     default:

@@ -1,7 +1,7 @@
 <div class="row mb-3">
     <label class="col-sm-2 col-form-label" for="input-{{ $name }}">{{ $title }}</label>
     <div class="col-sm-10">
-        <input type="{{ isset($type) ? $type : 'text' }}" class="form-control @error($name) is-invalid @enderror" id="input-{{ $name }}" placeholder="{{ isset($placeholder) ? $placeholder : '' }}" {{ $attributes }}>
+        <input type="{{ isset($type) ? $type : 'text' }}" class="form-control @error($name) is-invalid @enderror" id="input-{{ $name }}" placeholder="{{ isset($placeholder) ? $placeholder : 'masukkan data ' . str_replace('_', ' ', $name) }}" {{ $attributes }}>
 
         <div class="invalid-feedback">
             @error($name)

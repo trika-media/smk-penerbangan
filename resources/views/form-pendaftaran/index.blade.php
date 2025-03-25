@@ -25,7 +25,8 @@
                             <x-form.input title="Email" name="email" wire:model="email" />
                             <x-form.input title="Nomor HP" name="nohp" wire:model="nohp" />
                             <x-form.input title="Tempat Lahir" name="tempat_lahir" wire:model="tempat_lahir" />
-                            <x-form.input title="Tanggal Lahir" name="tanggal_lahir" wire:model="tanggal_lahir" type="date" />
+                            <x-form.input title="Tanggal Lahir" name="tanggal_lahir" wire:model="tanggal_lahir"
+                                type="date" />
                             <x-form.input title="Asal Sekolah" name="asal_sekolah" wire:model="asal_sekolah" />
                             <x-form.select title="Jenis Kelamin" name="jk" wire:model="jk">
                                 <option value="" disabled>Pilih Jenis Kelamin</option>
@@ -43,6 +44,8 @@
                                     </option>
                                 @endforeach
                             </x-form.select>
+                            <x-form.input title="Nama Ibu" name="nama_ibu" wire:model="nama_ibu" />
+                            <x-form.input title="Nomor HP Ibu" name="nohp_ibu" wire:model="nohp_ibu" />
                             <x-form.select title="Jurusan" name="jurusan" wire:model="jurusan">
                                 <option value="" disabled>Pilih Jurusan</option>
                                 @foreach ($jurusan_data as $value)

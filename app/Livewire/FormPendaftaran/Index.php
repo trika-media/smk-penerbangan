@@ -12,13 +12,13 @@ class Index extends Component
 {
     use WithAlert;
 
-    public $nama = '', $email = '', $nohp = '', $tempat_lahir = '', $tanggal_lahir, $asal_sekolah = '', $jk = '', $agama = '', $jurusan = '';
+    public $nama = '', $email = '', $nohp = '', $tempat_lahir = '', $tanggal_lahir, $asal_sekolah = '', $jk = '', $agama = '', $jurusan = '', $nama_ibu    = '', $nohp_ibu    = '';
 
     public function rules()
     {
         return [
             'nama'          => 'required|unique:pendaftarans,nama',
-            'email'         => 'required|email',
+            'email'         => 'required|unique:pendaftarans,email|email:dns',
             'nohp'          => 'required|min:10',
             'tempat_lahir'  => 'required',
             'tanggal_lahir' => 'required|date',
@@ -26,6 +26,8 @@ class Index extends Component
             'jk'            => 'required',
             'agama'         => 'required',
             'jurusan'       => 'required',
+            'nama_ibu'      => 'required',
+            'nohp_ibu'      => 'required',
         ];
     }
 
@@ -38,16 +40,15 @@ class Index extends Component
         if ($id_pembayaran) {
             $validate['periode'] = $id_pembayaran->id;
         } else {
-            $this->alertEvent('warning', 'Pendaftaran Ditolak!', 'Pendaftaran Belum Berlaku!');
+            $this->alertEvent('Pendaftaran Ditolak!', 'warning', 'Pendaftaran Belum Berlaku!');
             return;
         }
         try {
             Pendaftaran::create($validate);
             $this->alert('success', 'Form Sukses Dikirim!', 'Silahkan hubungi admin, untuk info lebih lanjut!');
-            return to_route('welcome');
+            return to_route('form-pendaftaran.index');
         } catch (\Exception $e) {
-            dd($e);
-            $this->alertEvent('danger', 'Form Gagal Dikirim!', 'Silahkan hubungi admin, untuk info lebih lanjut!');
+            $this->alertEvent('Form Gagal Dikirim!', 'danger',  'Silahkan hubungi admin, untuk info lebih lanjut!');
         }
     }
 
