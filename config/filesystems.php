@@ -100,6 +100,15 @@ return [
             'throw' => false,
             'report' => false,
         ],
+        
+        'fotonya' => [
+            'driver' => 'local',
+            'root' => public_path('app/fotonya'),
+            'url' => env('APP_URL').'/app/fotonya',
+            'visibility' => 'public',
+            'throw' => false,
+            'report' => false,
+        ],
 
         's3' => [
             'driver' => 's3',
