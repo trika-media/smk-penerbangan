@@ -1,94 +1,108 @@
 <?php
 
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Storage;
 
 //WRAP ALL
-Route::namespace('\App\Livewire')->group(function() {
+Route::namespace('\App\Livewire')->group(function () {
     //NO MIDDLEWARE
     Route::get('/', Welcome::class)->name('welcome');
-    Route::namespace('Berita')->prefix('artikel')->as('berita.')->group(function() {
+    Route::namespace('Berita')->prefix('artikel')->as('berita.')->group(function () {
         Route::get('/', Index::class)->name('list');
         Route::get('/{slug}', Detail::class)->name('detail');
     });
-    Route::namespace('FormPendaftaran')->prefix('form-pendaftaran')->as('form-pendaftaran.')->group(function() {
+    Route::namespace('FormPendaftaran')->prefix('form-pendaftaran')->as('form-pendaftaran.')->group(function () {
         Route::get('/', Index::class)->name('index');
     });
-    Route::namespace('Profil')->prefix('profil')->as('profil.')->group(function() {
+    Route::namespace('Profil')->prefix('profil')->as('profil.')->group(function () {
         Route::get('/{id}', Index::class)->name('index');
     });
-    Route::namespace('Keunggulan')->prefix('keunggulan')->as('keunggulan.')->group(function() {
+    Route::namespace('Keunggulan')->prefix('keunggulan')->as('keunggulan.')->group(function () {
         Route::get('/', Index::class)->name('index');
     });
-    Route::namespace('MengapaSmk')->prefix('mengapa-smk')->as('mengapa-smk.')->group(function() {
+    Route::namespace('MengapaSmk')->prefix('mengapa-smk')->as('mengapa-smk.')->group(function () {
         Route::get('/', Index::class)->name('index');
         Route::get('/{slug}', Detail::class)->name('detail');
     });
-    Route::namespace('KompetensiKeahlian')->prefix('jurusan')->as('jurusan.')->group(function() {
+    Route::namespace('KompetensiKeahlian')->prefix('jurusan')->as('jurusan.')->group(function () {
         Route::get('/', Index::class)->name('index');
         Route::get('/profil/{id}', Profil::class)->name('profil');
     });
+    Route::post('/upload-image', function (\Illuminate\Http\Request $request) {
+        if ($request->hasFile('file')) {
+            $filename = "FOTONYA_" . Str::uuid();
+            $path = $request->file('file');
+            optimize_image($path, 'fotonya', $filename);
+            $url = Storage::disk('fotonya')->url($filename);
+            return response()->json(['location' => $url]);
+        }
+    
+        return response()->json(['error' => 'No file uploaded'], 400);
+    });
+    
     //GUEST ONLY
     Route::get('/start-your-day', Login::class)
-    ->middleware('guest')
-    ->name('login');
-    
+        ->middleware('guest')
+        ->name('login');
+
     //AUTHENTICATED ONLY
     Route::middleware('auth')->group(function () {
-        Route::namespace('Admin')->group(function() {
+        Route::namespace('Admin')->group(function () {
             Route::get('/admin/dashboard', Dashboard::class)->name('dashboard');
-            Route::namespace('Pendaftaran')->prefix('pendaftaran')->as('pendaftaran.')->group(function() {
+            Route::namespace('Pendaftaran')->prefix('pendaftaran')->as('pendaftaran.')->group(function () {
                 Route::get('/', Index::class)->name('index');
             });
-            Route::namespace('KompetensiKeahlian')->prefix('kompetensi-keahlian')->as('kompetensi-keahlian.')->group(function() {
+            Route::namespace('KompetensiKeahlian')->prefix('kompetensi-keahlian')->as('kompetensi-keahlian.')->group(function () {
                 Route::get('/', Index::class)->name('index');
             });
-            Route::namespace('AlasanMemilih')->prefix('alasan-memilih')->as('alasan-memilih.')->group(function() {
+            Route::namespace('AlasanMemilih')->prefix('alasan-memilih')->as('alasan-memilih.')->group(function () {
                 Route::get('/', Index::class)->name('index');
             });
-            Route::namespace('Slider')->prefix('slider')->as('slider.')->group(function() {
+            Route::namespace('Slider')->prefix('slider')->as('slider.')->group(function () {
                 Route::get('/', Index::class)->name('index');
             });
-            Route::namespace('InfoPembayaran')->prefix('info-pembayaran')->as('info-pembayaran.')->group(function() {
+            Route::namespace('InfoPembayaran')->prefix('info-pembayaran')->as('info-pembayaran.')->group(function () {
                 Route::get('/', Index::class)->name('index');
             });
-            Route::namespace('PeriodePendaftaran')->prefix('periode-pendaftaran')->as('periode-pendaftaran.')->group(function() {
+            Route::namespace('PeriodePendaftaran')->prefix('periode-pendaftaran')->as('periode-pendaftaran.')->group(function () {
                 Route::get('/', Index::class)->name('index');
             });
-            Route::namespace('Faq')->prefix('faq')->as('faq.')->group(function() {
+            Route::namespace('Faq')->prefix('faq')->as('faq.')->group(function () {
                 Route::get('/', Index::class)->name('index');
             });
-            Route::namespace('RunningText')->prefix('running-text')->as('running-text.')->group(function() {
+            Route::namespace('RunningText')->prefix('running-text')->as('running-text.')->group(function () {
                 Route::get('/', Index::class)->name('index');
             });
-            Route::namespace('Berita')->prefix('berita')->as('berita.')->group(function() {
-                Route::get('/', Index::class)->name('index');
-                Route::get('/{id?}', Form::class)->name('form');
-            });
-            Route::namespace('BlogMengapaSmk')->prefix('blog-mengapa-smk')->as('blog-mengapa-smk.')->group(function() {
+            Route::namespace('Berita')->prefix('berita')->as('berita.')->group(function () {
                 Route::get('/', Index::class)->name('index');
                 Route::get('/{id?}', Form::class)->name('form');
             });
-            Route::namespace('BiodataSingkat')->prefix('biodata-singkat')->as('biodata-singkat.')->group(function() {
+            Route::namespace('BlogMengapaSmk')->prefix('blog-mengapa-smk')->as('blog-mengapa-smk.')->group(function () {
+                Route::get('/', Index::class)->name('index');
+                Route::get('/{id?}', Form::class)->name('form');
+            });
+            Route::namespace('BiodataSingkat')->prefix('biodata-singkat')->as('biodata-singkat.')->group(function () {
                 Route::get('/', Index::class)->name('index');
             });
-            Route::namespace('Benefit')->prefix('benefit')->as('benefit.')->group(function() {
+            Route::namespace('Benefit')->prefix('benefit')->as('benefit.')->group(function () {
                 Route::get('/', Index::class)->name('index');
             });
-            Route::namespace('Facility')->prefix('facility')->as('facility.')->group(function() {
+            Route::namespace('Facility')->prefix('facility')->as('facility.')->group(function () {
                 Route::get('/', Index::class)->name('index');
             });
-            Route::namespace('Settings')->prefix('settings')->as('settings.')->group(function() {
-                Route::namespace('Variabel')->prefix('variabel')->as('variabel.')->group(function() {
+            Route::namespace('Settings')->prefix('settings')->as('settings.')->group(function () {
+                Route::namespace('Variabel')->prefix('variabel')->as('variabel.')->group(function () {
                     Route::get('/', Index::class)->name('index');
                 });
-                Route::namespace('Akun')->prefix('akun')->as('akun.')->group(function() {
+                Route::namespace('Akun')->prefix('akun')->as('akun.')->group(function () {
                     Route::get('/', Index::class)->name('index');
                 });
             });
         });
         Route::get('/logout', function () {
             Auth::logout();
-        
+
             return redirect('/');
         })->name('logout');
     });

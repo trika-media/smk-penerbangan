@@ -2,10 +2,11 @@
 namespace App\Livewire\Admin\BiodataSingkat;
 
 use App\Models\Biodata;
+use Livewire\Component;
 use App\Traits\WithAlert;
 use Illuminate\Support\Str;
 use Livewire\Attributes\On;
-use Livewire\Component;
+use Illuminate\Support\Facades\Storage;
 use Spatie\LivewireFilepond\WithFilePond;
 
 #[On('render_again')]
@@ -13,13 +14,13 @@ class Index extends Component
 {
     use WithFilePond, WithAlert;
 
-    public $biodata, $image, $data, $image_row = [], $delete;
+    public $biodata, $image, $data, $image_row = [], $delete, $images = [];
     public $step = 'biodata';
 
     public function mount()
     {
         $data = Biodata::get();
-        if (! $data->isEmpty()) {
+        if (!$data->isEmpty()) {
             $this->biodata = $data?->where('type', 'biodata')?->first()?->value;
             $this->image_row = $data?->where('type', 'biodata_image');
             $this->data = $data;
@@ -75,6 +76,19 @@ class Index extends Component
         $this->alertEvent('Berhasil!', 'success', 'Data Berhasil Dihapus');
         $this->dispatch('closedeleteModal');
     }
+
+    public function uploadImage()
+{
+    if ($this->image) {
+        if($filename == '') {
+            $filename = strtoupper('fotonya') . '_' . Str::orderedUuid() . '.' . $this->image->getClientOriginalExtension();
+        }
+        OptimizerChainFactory::create()->optimize($this->image->getRealPath(), Storage::disk('fotonya')->path('') . '/' . $filename);
+
+        $this->dispatch('imageUploaded', ['url' => Storage::disk('fotonya')->url($this->image)]); // Emit event for TinyMCE
+    }
+}
+
 
     public function save()
     {
