@@ -7,6 +7,7 @@ use App\Traits\WithAlert;
 use Illuminate\Support\Str;
 use App\Models\AlasanMemilih;
 use Livewire\WithFileUploads;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Spatie\LivewireFilepond\WithFilePond;
 use Spatie\LaravelImageOptimizer\Facades\ImageOptimizer;
@@ -24,7 +25,6 @@ class Index extends Component
         $data = AlasanMemilih::first();
         if($data) {
             $this->title = $data->title;
-            $this->image = $data->imageUrl();
             $this->url_pendaftaran = $data->url_pendaftaran;
             $this->ringkasan = $data->ringkasan;
             $this->jum_list = count($data->lists);
@@ -51,13 +51,22 @@ class Index extends Component
     }
 
     public function save() {
-        $validate = $this->validate([
-            'title' => 'required|max:100',
-            'url_pendaftaran' => 'required|url:http,https',
-            'ringkasan' => 'required|max:500',
-            'lists.*' => 'required',
-            'image' => 'required|file|image|mimes:png,jpg,jpeg,svg|max:2048'
-        ]);
+        if($this->image) {
+            $validate = $this->validate([
+                'title' => 'required|max:100',
+                'url_pendaftaran' => 'required|url:http,https',
+                'ringkasan' => 'required|max:500',
+                'lists.*' => 'required',
+                'image' => 'required|file|image|mimes:png,jpg,jpeg,svg|max:2048'
+            ]);
+        } else {
+            $validate = $this->validate([
+                'title' => 'required|max:100',
+                'url_pendaftaran' => 'required|url:http,https',
+                'ringkasan' => 'required|max:500',
+                'lists.*' => 'required'
+            ]);
+        }
 
         try {
             if ($this->image) {
@@ -67,19 +76,21 @@ class Index extends Component
             }
 
             if(AlasanMemilih::first()) {
-                AlasanMemilih::get()->delete();
-                if(Storage::disk('homepage')->exists($validate['image'])) {
-                    Storage::disk('homepage')->delete($validate['image']);
+                if($filename) {
+                    if(Storage::disk('homepage')->exists($validate['image'])) {
+                        Storage::disk('homepage')->delete($validate['image']);
+                    }
+                    optimize_image($validate['image'], 'homepage', $filename);
                 }
-                optimize_image($validate['image'], 'homepage', $filename);
-
-                AlasanMemilih::create([
-                    'title' => $validate['title'],
-                    'url_pendaftaran' => $validate['url_pendaftaran'],
-                    'ringkasan' => $validate['ringkasan'],
-                    'lists' => $validate['lists'],
-                    'image' => $filename
-                ]);
+                $data = AlasanMemilih::find(AlasanMemilih::first()->id);
+                $data->title = $validate['title'];
+                $data->url_pendaftaran = $validate['url_pendaftaran'];
+                $data->ringkasan = $validate['ringkasan'];
+                $data->lists = $validate['lists'];
+                if($filename) {
+                    $data->image = $filename;
+                }
+                $data->save();
             } else {
                 optimize_image($validate['image'], 'homepage', $filename);
                 AlasanMemilih::create([

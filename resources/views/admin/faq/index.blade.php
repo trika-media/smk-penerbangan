@@ -6,7 +6,7 @@
         </button>
     </x-heading>
 
-    <x-modal key="modalCreate" :title="$edit ? 'Edit Data' : 'Tambah Data'" size="xl" styled>
+    <x-modal key="modalCreate" title="{{ $this->edit ? 'Edit Data' : 'Tambah Data' }}" size="xl" styled>
         <x-form.input title="Pertanyaan" name="question" wire:model="question" />
         <div class="row mb-3">
             <label class="col-sm-2 col-form-label" for="input-question">Jawaban</label>

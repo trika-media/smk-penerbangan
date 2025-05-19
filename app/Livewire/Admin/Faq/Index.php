@@ -56,9 +56,8 @@ class Index extends Component
     {
         $data = Faq::findOrFail($id);
         $this->edit = $id;
-        $this->deskripsi = $data->deskripsi;
-        $this->jumlah = $data->jumlah;
-        $this->semester = $data->semester;
+        $this->question = $data->question;
+        $this->answer = $data->answer;
         $this->dispatch('openmodalCreate');
     }
 

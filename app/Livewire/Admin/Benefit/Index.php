@@ -25,7 +25,6 @@ class Index extends Component
         if($data) {
             $this->title = $data->title;
             $this->jum_list = count($data->lists);
-            $this->image = $data->imageUrl();
             for($i = 1; $i <= count($data->lists); $i++) {
                 $this->lists[$i] = $data->lists[$i];
             }
@@ -49,11 +48,18 @@ class Index extends Component
     }
 
     public function save() {
-        $validate = $this->validate([
-            'title' => 'required|max:100',
-            'lists.*' => 'required',
-            'image' => 'required|file|image|mimes:png,jpg,jpeg,svg|max:2048'
-        ]);
+        if($this->image) {
+            $validate = $this->validate([
+                'title' => 'required|max:100',
+                'lists.*' => 'required',
+                'image' => 'required|file|image|mimes:png,jpg,jpeg,svg|max:2048'
+            ]);
+        } else {
+            $validate = $this->validate([
+                'title' => 'required|max:100',
+                'lists.*' => 'required'
+            ]);
+        }
 
         try {
             if ($this->image) {
@@ -63,17 +69,19 @@ class Index extends Component
             }
 
             if(BenefitMemilih::first()) {
-                BenefitMemilih::query()->delete();
-                if(Storage::disk('homepage')->exists($validate['image'])) {
-                    Storage::disk('homepage')->delete($validate['image']);
+                if($filename) {
+                    if(Storage::disk('homepage')->exists($validate['image'])) {
+                        Storage::disk('homepage')->delete($validate['image']);
+                    }
+                    optimize_image($validate['image'], 'homepage', $filename);
                 }
-                optimize_image($validate['image'], 'homepage', $filename);
-
-                BenefitMemilih::create([
-                    'title' => $validate['title'],
-                    'lists' => $validate['lists'],
-                    'image' => $filename
-                ]);
+                $data = BenefitMemilih::find(BenefitMemilih::first()->id);
+                $data->title = $validate['title'];
+                $data->lists = $validate['lists'];
+                if($filename) {
+                    $data->image = $filename;
+                }
+                $data->save();
             } else {
                 optimize_image($validate['image'], 'homepage', $filename);
                 BenefitMemilih::create([

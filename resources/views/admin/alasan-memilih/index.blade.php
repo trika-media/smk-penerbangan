@@ -7,7 +7,7 @@
             <x-form.input title="Title" name="title" wire:model.live="title" placeholder="Murah Dan Bagus" />
             <x-form.input title="URL Pendaftaran" name="url_pendaftaran" wire:model.live="url_pendaftaran" placeholder="https://youtube.com" />
             <x-form.text-area title="Ringkasan" name="ringkasan" wire:model.live="ringkasan" />
-            <x-filepond::upload wire:model="image" />
+            <x-form.filepond name="image" />
             <div class="d-flex justify-content-between align-items-center mb-2">
                 <h5 class="mb-0">List Alasan</h5>
                 <div class="d-flex gap-2">
