@@ -29,18 +29,7 @@ Route::namespace('\App\Livewire')->group(function () {
         Route::get('/', Index::class)->name('index');
         Route::get('/profil/{id}', Profil::class)->name('profil');
     });
-    Route::post('/upload-image', function (\Illuminate\Http\Request $request) {
-        if ($request->hasFile('file')) {
-            $filename = "FOTONYA_" . Str::uuid();
-            $path = $request->file('file');
-            optimize_image($path, 'fotonya', $filename);
-            $url = Storage::disk('fotonya')->url($filename);
-            return response()->json(['location' => $url]);
-        }
-    
-        return response()->json(['error' => 'No file uploaded'], 400);
-    });
-    
+
     //GUEST ONLY
     Route::get('/start-your-day', Login::class)
         ->middleware('guest')
@@ -48,6 +37,17 @@ Route::namespace('\App\Livewire')->group(function () {
 
     //AUTHENTICATED ONLY
     Route::middleware('auth')->group(function () {
+        Route::post('/upload-image', function (\Illuminate\Http\Request $request) {
+            if ($request->hasFile('file')) {
+                $filename = "FOTONYA_" . Str::uuid();
+                $path     = $request->file('file');
+                optimize_image($path, 'fotonya', $filename);
+                $url = Storage::disk('fotonya')->url($filename);
+                return response()->json(['location' => $url]);
+            }
+
+            return response()->json(['error' => 'No file uploaded'], 400);
+        });
         Route::namespace('Admin')->group(function () {
             Route::get('/admin/dashboard', Dashboard::class)->name('dashboard');
             Route::namespace('Pendaftaran')->prefix('pendaftaran')->as('pendaftaran.')->group(function () {
@@ -99,6 +99,7 @@ Route::namespace('\App\Livewire')->group(function () {
                     Route::get('/', Index::class)->name('index');
                 });
             });
+            Route::get('profil', Profile::class)->name('admin.profile');
         });
         Route::get('/logout', function () {
             Auth::logout();

@@ -11,7 +11,7 @@ class Index extends Component
 {
     use WithPerPagePagination, WithAlert;
 
-    public $edit, $delete, $question, $answer;
+    public $edit = '', $delete, $question, $answer;
 
     public function rules() {
         return [
