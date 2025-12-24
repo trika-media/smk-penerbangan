@@ -29,6 +29,11 @@ class Pendaftaran extends Model
         'accepted' => 'boolean'
     ];
 
+    public function jurusanData()
+    {
+        return $this->belongsTo(KompetensiKeahlian::class, 'jurusan', 'id');
+    }
+
     public function getJenisKelaminAttribute() {
         return config('const.JENIS_KELAMIN')[$this->jk]['nama'];
     }

@@ -241,7 +241,7 @@
                         <b>{{ config_get('APP_NAME') }}</b>
                     </p>
                     <p>
-                        <!--{!! Str::words($biodata->where('type', 'biodata')->first()->value, 500, '...') !!}-->
+                        
                     </p>
                 </div>
                 <div class="col-12 col-lg" data-aos="fade-right">

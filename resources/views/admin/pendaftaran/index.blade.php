@@ -1,5 +1,8 @@
 <div>
     <x-heading title="Pendaftaran" pretitle="Master Data">
+        <button type="button" class="btn btn-success" wire:click="exportExcel">
+            <i class="bx bx-printer me-1"></i> Export Excel
+        </button>
     </x-heading>
 
     <x-modal-delete />
@@ -23,7 +26,10 @@
                 @forelse($rows as $row)
                     <tr>
                         <td>{{ $loop->iteration }}</td>
-                        <td>{{ $row->nama }}</td>
+                        <td>
+                            {{ $row->nama }} <br>
+                            <small>Jurusan : {{ $row->jurusanData->nama ?? '-' }}</small>
+                        </td>
                         <td>{{ $row->email }}</td>
                         <td>{{ $row->nohp }}</td>
                         <td>{{ $row->jenis_kelamin }}</td>

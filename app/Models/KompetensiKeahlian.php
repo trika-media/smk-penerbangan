@@ -12,6 +12,10 @@ class KompetensiKeahlian extends Model
         'deskripsi',
         'image'
     ];
+
+    public function pendaftaran() {
+        return $this->hasMany(Pendaftaran::class, 'jurusan', 'id');
+    }
     
     public function imageUrl() {
         return Storage::disk('homepage')->url($this->image);

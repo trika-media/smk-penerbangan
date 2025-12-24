@@ -5,13 +5,20 @@ namespace App\Livewire\Admin\Pendaftaran;
 use Livewire\Component;
 use App\Traits\WithAlert;
 use App\Models\Pendaftaran;
+use Maatwebsite\Excel\Facades\Excel;
 use App\Traits\WithPerPagePagination;
+use App\Exports\PendaftaranDataExport;
 
 class Index extends Component
 {
     use WithPerPagePagination, WithAlert;
 
     public $delete;
+
+    public function exportExcel() {
+        $timestamp = date('Y_m_d_H_i_s');
+        return Excel::download(new PendaftaranDataExport($this->rowsQuery->get()), 'pendaftaran_data_'.$timestamp.'.xlsx');
+    }
 
     public function declineData($id) {
         $data = Pendaftaran::findOrFail($id);
@@ -41,8 +48,12 @@ class Index extends Component
         $this->dispatch('closedeleteModal');
     }
 
+    public function getRowsQueryProperty() {
+        return Pendaftaran::with('jurusanData')->latest();
+    }
+
     public function getRowsProperty() {
-        return $this->applyPagination(Pendaftaran::latest());
+        return $this->applyPagination($this->rowsQuery);
     }
 
     public function render()
