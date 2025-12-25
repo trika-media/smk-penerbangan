@@ -10,7 +10,7 @@ use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use Maatwebsite\Excel\Concerns\WithColumnWidths;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
-class PendaftaranDataExport implements FromCollection, WithColumnWidths, WithMapping, WithHeadings, WithStyles, ShouldAutoSize
+class PendaftaranDataExport implements FromCollection, WithMapping, WithHeadings, WithStyles, ShouldAutoSize
 {
     public $data;
 
