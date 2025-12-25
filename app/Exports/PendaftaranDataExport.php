@@ -2,12 +2,15 @@
 
 namespace App\Exports;
 
+use Maatwebsite\Excel\Concerns\WithStyles;
 use Maatwebsite\Excel\Concerns\WithMapping;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
+use Maatwebsite\Excel\Concerns\WithColumnWidths;
+use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
-class PendaftaranDataExport implements FromCollection, ShouldAutoSize, WithMapping, WithHeadings
+class PendaftaranDataExport implements FromCollection, WithColumnWidths, WithMapping, WithHeadings, WithStyles, ShouldAutoSize
 {
     public $data;
 
@@ -58,5 +61,38 @@ class PendaftaranDataExport implements FromCollection, ShouldAutoSize, WithMappi
     public function collection()
     {
         return $this->data;
+    }
+
+    public function styles(Worksheet $sheet)
+    {
+        return [
+            // Style the header row
+            1 => [
+                'font' => [
+                    'bold' => true,
+                    'color' => ['rgb' => 'FFFFFF'],
+                ],
+                'fill' => [
+                    'fillType' => 'solid',
+                    'startColor' => ['rgb' => '4F81BD'],
+                ],
+                'alignment' => [
+                    'horizontal' => 'center',
+                    'vertical' => 'center',
+                ],
+            ],
+            // Style all data rows
+            'A2:L' . ($this->data->count() + 1) => [
+                'borders' => [
+                    'allBorders' => [
+                        'borderStyle' => 'thin',
+                        'color' => ['rgb' => 'CCCCCC'],
+                    ],
+                ],
+                'alignment' => [
+                    'vertical' => 'center',
+                ],
+            ],
+        ];
     }
 }
