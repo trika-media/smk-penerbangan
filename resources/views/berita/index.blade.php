@@ -19,7 +19,7 @@
                                     </a>
                                 </h5>
                                 <small>
-                                    {!! Str::words($row->konten, 30, '...') !!}
+                                    {{ Str::words(strip_tags($row->konten), 30, '...') }}
                                 </small>
                             </div>
                         </div>

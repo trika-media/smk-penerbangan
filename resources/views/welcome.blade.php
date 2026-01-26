@@ -337,7 +337,7 @@
                                     </a>
                                 </h5>
                                 <small>
-                                    {!! Str::words($beri->konten, 30, '...') !!}
+                                    {{ Str::words(strip_tags($beri->konten), 30, '...') }}
                                 </small>
                             </div>
                         </div>

@@ -38,7 +38,7 @@ class Welcome extends Component
             'benefit_memilih' => BenefitMemilih::first(),
             'biodata' => Biodata::get(),
             'slider' => Slider::get(),
-            'berita' => Berita::limit(10)->get(),
+            'berita' => Berita::latest()->limit(10)->get(),
             'fasilitas' => Fasilitas::get(),
             'info_pembayaran' => $id_pembayaran
         ])->layout('components.layouts.home');

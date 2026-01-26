@@ -9,7 +9,7 @@ class Index extends Component
     public function render()
     {
         return view('berita.index', [
-            'rows' => News::paginate(10),
+            'rows' => News::latest()->paginate(10),
         ])->layout('components.layouts.home');
     }
 }
