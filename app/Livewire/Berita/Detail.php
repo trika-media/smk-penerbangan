@@ -22,7 +22,7 @@ class Detail extends Component
     {
         return view('berita.detail', [
             'berita'           => $this->berita,
-            'available_berita' => News::where('slug', '!=', $this->slug)->limit(5)->get(),
+            'available_berita' => News::where('slug', '!=', $this->slug)->inRandomOrder()->limit(5)->get(),
         ])->layout('components.layouts.home');
     }
 }
