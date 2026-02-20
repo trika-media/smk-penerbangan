@@ -64,8 +64,7 @@
             style="backdrop-filter: blur(10px)">
             <div class="container py-2">
                 <a class="navbar-brand w-100" href="/">
-                    <img src="{{ asset('logo.png') }}" style="width: auto; object-fit: cover; height: 5rem;">
-                    {{-- {{ config_get('APP_NAME') }} --}}
+                    <img src="https://pbs.twimg.com/profile_images/1099733431267651594/s73KTYeo.jpg" style="width: auto; object-fit: cover; height: 5rem;">
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
